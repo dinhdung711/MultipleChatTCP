@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CuoiKiLTMClient/CuoiKiLTMClient.csproj" />
+  <Project Path="CuoiKiLTMServer/CuoiKiLTMServer.csproj" />
+</Solution>

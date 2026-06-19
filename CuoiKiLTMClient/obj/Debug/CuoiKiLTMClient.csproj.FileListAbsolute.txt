@@ -1,0 +1,10 @@
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\bin\Debug\CuoiKiLTMClient.exe.config
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\bin\Debug\CuoiKiLTMClient.exe
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\bin\Debug\CuoiKiLTMClient.pdb
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.csproj.AssemblyReference.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Properties.Resources.resources
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.csproj.GenerateResource.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.csproj.CoreCompileInputs.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.exe
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.pdb
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Client.resources

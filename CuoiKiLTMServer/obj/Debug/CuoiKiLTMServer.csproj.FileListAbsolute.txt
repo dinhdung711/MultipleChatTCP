@@ -1,0 +1,10 @@
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.exe.config
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.exe
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.pdb
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.AssemblyReference.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.Properties.Resources.resources
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.GenerateResource.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.CoreCompileInputs.cache
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.exe
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.pdb
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.Server.resources
