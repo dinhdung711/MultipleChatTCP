@@ -37,16 +37,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbPort = new System.Windows.Forms.Label();
             this.butStart = new System.Windows.Forms.Button();
+            this.lbUser = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
             // Online
             // 
+            this.Online.CheckOnClick = true;
             this.Online.FormattingEnabled = true;
             this.Online.Location = new System.Drawing.Point(19, 107);
             this.Online.Name = "Online";
             this.Online.Size = new System.Drawing.Size(220, 327);
             this.Online.TabIndex = 37;
+            this.Online.DoubleClick += new System.EventHandler(this.Online_DoubleClick);
             // 
             // butSend
             // 
@@ -73,10 +76,10 @@
             this.txtBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBox.Location = new System.Drawing.Point(245, 106);
+            this.txtBox.Location = new System.Drawing.Point(245, 116);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(536, 287);
+            this.txtBox.Size = new System.Drawing.Size(536, 277);
             this.txtBox.TabIndex = 34;
             // 
             // numPort
@@ -143,11 +146,21 @@
             this.butStart.UseVisualStyleBackColor = true;
             this.butStart.Click += new System.EventHandler(this.butStart_Click);
             // 
-            // Form1
+            // lbUser
+            // 
+            this.lbUser.AutoSize = true;
+            this.lbUser.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUser.Location = new System.Drawing.Point(256, 97);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(0, 26);
+            this.lbUser.TabIndex = 38;
+            // 
+            // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbUser);
             this.Controls.Add(this.Online);
             this.Controls.Add(this.butSend);
             this.Controls.Add(this.txtMessage);
@@ -157,7 +170,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.butStart);
-            this.Name = "Form1";
+            this.Name = "Server";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
@@ -176,6 +189,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.Button butStart;
+        private System.Windows.Forms.Label lbUser;
     }
 }
 

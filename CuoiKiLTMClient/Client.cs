@@ -67,6 +67,7 @@ namespace CuoiKiLTMClient
             CapNhatNoiDungChat("Client: " + txtMessage.Text);
             txtMessage.Text = "";
         }
+       
         private void txtServerIP_TextChanged(object sender, EventArgs e)
         {
 
@@ -76,6 +77,7 @@ namespace CuoiKiLTMClient
         {
 
         }
+        
 
        
 

@@ -12,5 +12,9 @@ namespace CuoiKiLTMServer
         public Socket sckInfo;
         public string Username;
         public byte[] data = new byte[1024];
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }

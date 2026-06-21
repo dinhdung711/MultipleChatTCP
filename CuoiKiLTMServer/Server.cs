@@ -88,7 +88,7 @@ namespace CuoiKiLTMServer
             if (part[0] == "login" && part.Length > 1)
             {
                 sender.Username = part[1];
-                Online.Invoke(new Action(() => Online.Items.Add(sender.Username)));
+                Online.Invoke(new Action(() => Online.Items.Add(sender)));
             }
             else if (part[0] == "msg" && part.Length > 1)
             {
@@ -110,9 +110,12 @@ namespace CuoiKiLTMServer
 
         private void butSend_Click(object sender, EventArgs e)
         {
-            sckClient.Send(Encoding.ASCII.GetBytes(txtMessage.Text));
-            CapNhatNoiDungChat("Server: " + txtMessage.Text);
-            txtMessage.Text = "";
+
+            string s = txtMessage.Text;
+            if (SelectedClient != null)
+            {
+                SendToSelected(SelectedClient, s);
+            }
         }
         //
         public void CloseClient(ClientInfo client)
@@ -123,5 +126,34 @@ namespace CuoiKiLTMServer
             connection--;
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "So Client ket noi :" + connection });
         }
+        void ChatPrivate()
+        {
+
+        }
+        ClientInfo SelectedClient = null;
+        private void Online_DoubleClick(object sender, EventArgs e)
+
+        {
+            if (Online.SelectedItem is ClientInfo client)
+            {
+                MessageBox.Show(client.Username);
+                SelectedClient = client;
+                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
+                txtBox.Clear();
+            }
+    }
+        void CapNhatNguoiDung(string s)
+        {
+            lbUser.Text = s;
+        }
+        void SendToSelected(ClientInfo client ,string s)
+        {
+            client.sckInfo.Send(Encoding.ASCII.GetBytes(s));
+            CapNhatNoiDungChat("Server: " +s);
+            s = "";
+
+        }
+
+       
     }
 }
