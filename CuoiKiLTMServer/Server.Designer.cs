@@ -49,6 +49,7 @@
             this.Online.Name = "Online";
             this.Online.Size = new System.Drawing.Size(220, 327);
             this.Online.TabIndex = 37;
+            this.Online.Click += new System.EventHandler(this.Online_Click);
             this.Online.DoubleClick += new System.EventHandler(this.Online_DoubleClick);
             // 
             // butSend
@@ -61,6 +62,7 @@
             this.butSend.Text = "Send";
             this.butSend.UseVisualStyleBackColor = true;
             this.butSend.Click += new System.EventHandler(this.butSend_Click);
+            this.butSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.butSend_KeyPress);
             // 
             // txtMessage
             // 
@@ -76,10 +78,10 @@
             this.txtBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBox.Location = new System.Drawing.Point(245, 116);
+            this.txtBox.Location = new System.Drawing.Point(245, 141);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(536, 277);
+            this.txtBox.Size = new System.Drawing.Size(536, 252);
             this.txtBox.TabIndex = 34;
             // 
             // numPort
@@ -148,11 +150,11 @@
             // 
             // lbUser
             // 
-            this.lbUser.AutoSize = true;
-            this.lbUser.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUser.Location = new System.Drawing.Point(256, 97);
+            this.lbUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbUser.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUser.Location = new System.Drawing.Point(245, 107);
             this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(0, 26);
+            this.lbUser.Size = new System.Drawing.Size(73, 25);
             this.lbUser.TabIndex = 38;
             // 
             // Server
@@ -172,6 +174,7 @@
             this.Controls.Add(this.butStart);
             this.Name = "Server";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Server_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

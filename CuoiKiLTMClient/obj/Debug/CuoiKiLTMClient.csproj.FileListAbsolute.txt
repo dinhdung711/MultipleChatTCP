@@ -8,3 +8,4 @@ C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTM
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.exe
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.pdb
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Client.resources
+C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Login.resources
