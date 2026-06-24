@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="CuoiKiLTMClient/CuoiKiLTMClient.csproj" />
-  <Project Path="CuoiKiLTMServer/CuoiKiLTMServer.csproj" />
+  <Project Path="CuoiKiLTMClient/CuoiKiLTMClient.csproj" Id="a39e7ef5-eee2-4456-85e3-03683bba0789" />
+  <Project Path="CuoiKiLTMServer/CuoiKiLTMServer.csproj" Id="c7071db0-383e-4d65-8740-7a5341dad1b1" />
 </Solution>

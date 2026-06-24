@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CuoiKiLTMServer
+namespace CuoiKiLTMClient
 {
     public class ClientInfo
     {

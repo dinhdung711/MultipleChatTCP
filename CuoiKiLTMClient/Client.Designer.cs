@@ -39,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbPort = new System.Windows.Forms.Label();
             this.butConnect = new System.Windows.Forms.Button();
+            this.lbUser = new System.Windows.Forms.Label();
+            this.lbName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,10 +99,10 @@
             this.txtBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBox.Location = new System.Drawing.Point(245, 106);
+            this.txtBox.Location = new System.Drawing.Point(245, 139);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(536, 287);
+            this.txtBox.Size = new System.Drawing.Size(536, 254);
             this.txtBox.TabIndex = 34;
             this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
@@ -172,11 +174,29 @@
             this.butConnect.UseVisualStyleBackColor = true;
             this.butConnect.Click += new System.EventHandler(this.butConnect_Click);
             // 
-            // Form1
+            // lbUser
+            // 
+            this.lbUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbUser.Location = new System.Drawing.Point(245, 106);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(88, 30);
+            this.lbUser.TabIndex = 40;
+            // 
+            // lbName
+            // 
+            this.lbName.BackColor = System.Drawing.SystemColors.Info;
+            this.lbName.Location = new System.Drawing.Point(16, 61);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(106, 42);
+            this.lbName.TabIndex = 41;
+            // 
+            // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbName);
+            this.Controls.Add(this.lbUser);
             this.Controls.Add(this.Online);
             this.Controls.Add(this.txtServerIP);
             this.Controls.Add(this.label2);
@@ -188,7 +208,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.butConnect);
-            this.Name = "Form1";
+            this.Name = "Client";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
@@ -209,6 +229,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.Button butConnect;
+        private System.Windows.Forms.Label lbUser;
+        private System.Windows.Forms.Label lbName;
     }
 }
 
