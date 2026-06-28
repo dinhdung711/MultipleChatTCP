@@ -18,6 +18,8 @@ namespace CuoiKiLTMServer
         {
             InitializeComponent();
         }
+        //
+        Dictionary<string,List<ClientInfo>> Group = new Dictionary<string,List<ClientInfo>>();
         List<ClientInfo> sck = new List<ClientInfo>();
         //
         Socket sckServer = null;
@@ -87,7 +89,8 @@ namespace CuoiKiLTMServer
             if (part[0] == "login" && part.Length > 1)
             {
                 sender.Username = part[1];
-                Online.Invoke(new Action(() => Online.Items.Add(sender)));
+                //Online.Invoke(new Action(() => Online.Items.Add(sender)));
+                lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
                 UpdateOnlineList();
             }
             else if (part[0] == "msg" && part.Length > 2)
@@ -150,7 +153,7 @@ namespace CuoiKiLTMServer
             
             sck.Remove(client);
             // xoa client tren thanh online
-            Online.Invoke(new Action(() => Online.Items.Remove(client)));
+            lstUser.Invoke(new Action(() => lstUser.Items.Remove(client)));
             //
             connection--;
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "So Client ket noi :" + connection });
@@ -207,20 +210,12 @@ namespace CuoiKiLTMServer
             }
         }
 
-        private void Online_Click(object sender, EventArgs e)
+        
+        // tao nhom
+        void creatGroup(string groupName,List<ClientInfo> clients)
         {
-            if (tabControl.SelectedTab == userOnline) 
-            {
-            if (Online.SelectedItem is ClientInfo client)
-                {
-                MessageBox.Show(client.Username);
-                SelectedClient = client;
-                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
-                txtBox.Clear();
-                }
-            } 
-        }
 
+        }
         private void Server_Load(object sender, EventArgs e)
         {
 
@@ -236,9 +231,22 @@ namespace CuoiKiLTMServer
 
         private void butExit_Click(object sender, EventArgs e)
         {
-            sckServer.Close();
-            sckClient.Close();
             this.Close();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == userOnline)
+            {
+                if (lstUser.SelectedItem is ClientInfo client)
+                {
+                    MessageBox.Show(client.Username);
+                    SelectedClient = client;
+                    lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
+
+                    txtBox.Clear();
+                }
+            }
         }
     }
 }

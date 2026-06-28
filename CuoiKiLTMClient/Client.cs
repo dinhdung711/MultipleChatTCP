@@ -140,34 +140,36 @@ namespace CuoiKiLTMClient
         }
       
         string SelectedUser = "";
-        private void Online_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            if (Online.SelectedItem != null)
-            {
-                SelectedUser = Online.SelectedItem.ToString();
-                lbUser.Text =SelectedUser;
-            }
-            MessageBox.Show(SelectedUser);
-            //txtBox.Clear();
-        }
         
-   
+        
+
         void updateOnline(string users)
         {
-            Online.Invoke(new Action(() =>
+            lstUser.Invoke(new Action(() =>
             {
-                Online.Items.Clear();
+                lstUser.Items.Clear();
 
                 string[] ds = users.Split(',');
                 foreach (string user in ds)
                 {
                     if (user.Trim() != "")
                     {
-                        Online.Items.Add(user);
+                        lstUser.Items.Add(user);
                     }
                 }
             }));
+        }
+        private void lstUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == userOnline)
+            {
+                if (lstUser.SelectedItem != null)
+                {
+                    SelectedUser = lstUser.SelectedItem.ToString();
+                    lbUser.Text = SelectedUser;
+                }
+                MessageBox.Show(SelectedUser);
+            }
         }
 
         
@@ -182,6 +184,12 @@ namespace CuoiKiLTMClient
                 butSend_Click(sender, e);
             }
         }
+        private void butExit_Click(object sender, EventArgs e)
+        {
+            
+            this.Close();
+        }
+
          
         private void txtServerIP_TextChanged(object sender, EventArgs e)
         {
@@ -192,10 +200,7 @@ namespace CuoiKiLTMClient
         {
 
         }
-        
-
-       
-
+  
         private void txtMessage_TextChanged(object sender, EventArgs e)
         {
 
@@ -236,10 +241,7 @@ namespace CuoiKiLTMClient
 
         }
 
-        private void butExit_Click(object sender, EventArgs e)
-        {
-            sckClient.Close();
-            this.Close();
-        }
+       
+       
     }
 }

@@ -37,14 +37,19 @@
             this.lbPort = new System.Windows.Forms.Label();
             this.butStart = new System.Windows.Forms.Button();
             this.lbUser = new System.Windows.Forms.Label();
-            this.Online = new System.Windows.Forms.CheckedListBox();
             this.butFile = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.userOnline = new System.Windows.Forms.TabPage();
             this.butExit = new System.Windows.Forms.Button();
+            this.grOnline = new System.Windows.Forms.TabPage();
+            this.butCreatGroup = new System.Windows.Forms.Button();
+            this.butDeleteGroup = new System.Windows.Forms.Button();
+            this.lstUser = new System.Windows.Forms.ListBox();
+            this.lstGroup = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabControl.SuspendLayout();
             this.userOnline.SuspendLayout();
+            this.grOnline.SuspendLayout();
             this.SuspendLayout();
             // 
             // butSend
@@ -154,19 +159,6 @@
             this.lbUser.Size = new System.Drawing.Size(156, 25);
             this.lbUser.TabIndex = 38;
             // 
-            // Online
-            // 
-            this.Online.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.Online.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.Online.CheckOnClick = true;
-            this.Online.FormattingEnabled = true;
-            this.Online.Location = new System.Drawing.Point(6, 6);
-            this.Online.Name = "Online";
-            this.Online.Size = new System.Drawing.Size(200, 327);
-            this.Online.TabIndex = 37;
-            this.Online.Click += new System.EventHandler(this.Online_Click);
-            // 
             // butFile
             // 
             this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -180,6 +172,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.userOnline);
+            this.tabControl.Controls.Add(this.grOnline);
             this.tabControl.Location = new System.Drawing.Point(12, 94);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -188,7 +181,7 @@
             // 
             // userOnline
             // 
-            this.userOnline.Controls.Add(this.Online);
+            this.userOnline.Controls.Add(this.lstUser);
             this.userOnline.Location = new System.Drawing.Point(4, 25);
             this.userOnline.Name = "userOnline";
             this.userOnline.Padding = new System.Windows.Forms.Padding(3);
@@ -207,12 +200,66 @@
             this.butExit.UseVisualStyleBackColor = true;
             this.butExit.Click += new System.EventHandler(this.butExit_Click);
             // 
+            // grOnline
+            // 
+            this.grOnline.Controls.Add(this.lstGroup);
+            this.grOnline.Location = new System.Drawing.Point(4, 25);
+            this.grOnline.Name = "grOnline";
+            this.grOnline.Padding = new System.Windows.Forms.Padding(3);
+            this.grOnline.Size = new System.Drawing.Size(212, 343);
+            this.grOnline.TabIndex = 1;
+            this.grOnline.Text = "Group";
+            this.grOnline.UseVisualStyleBackColor = true;
+            // 
+            // butCreatGroup
+            // 
+            this.butCreatGroup.Location = new System.Drawing.Point(797, 290);
+            this.butCreatGroup.Name = "butCreatGroup";
+            this.butCreatGroup.Size = new System.Drawing.Size(76, 68);
+            this.butCreatGroup.TabIndex = 47;
+            this.butCreatGroup.Text = "Creat Group";
+            this.butCreatGroup.UseVisualStyleBackColor = true;
+            // 
+            // butDeleteGroup
+            // 
+            this.butDeleteGroup.Location = new System.Drawing.Point(797, 216);
+            this.butDeleteGroup.Name = "butDeleteGroup";
+            this.butDeleteGroup.Size = new System.Drawing.Size(76, 68);
+            this.butDeleteGroup.TabIndex = 48;
+            this.butDeleteGroup.Text = "Delete Group";
+            this.butDeleteGroup.UseVisualStyleBackColor = true;
+            // 
+            // lstUser
+            // 
+            this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstUser.FormattingEnabled = true;
+            this.lstUser.ItemHeight = 16;
+            this.lstUser.Location = new System.Drawing.Point(6, 6);
+            this.lstUser.Name = "lstUser";
+            this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstUser.Size = new System.Drawing.Size(200, 324);
+            this.lstUser.TabIndex = 0;
+            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // lstGroup
+            // 
+            this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstGroup.FormattingEnabled = true;
+            this.lstGroup.ItemHeight = 16;
+            this.lstGroup.Location = new System.Drawing.Point(6, 9);
+            this.lstGroup.Name = "lstGroup";
+            this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstGroup.Size = new System.Drawing.Size(200, 324);
+            this.lstGroup.TabIndex = 1;
+            // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(892, 513);
+            this.Controls.Add(this.butDeleteGroup);
+            this.Controls.Add(this.butCreatGroup);
             this.Controls.Add(this.butExit);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.butFile);
@@ -231,6 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.userOnline.ResumeLayout(false);
+            this.grOnline.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,11 +294,15 @@
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.Button butStart;
         private System.Windows.Forms.Label lbUser;
-        private System.Windows.Forms.CheckedListBox Online;
         private System.Windows.Forms.Button butFile;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage userOnline;
         private System.Windows.Forms.Button butExit;
+        private System.Windows.Forms.TabPage grOnline;
+        private System.Windows.Forms.Button butCreatGroup;
+        private System.Windows.Forms.Button butDeleteGroup;
+        private System.Windows.Forms.ListBox lstUser;
+        private System.Windows.Forms.ListBox lstGroup;
     }
 }
 
