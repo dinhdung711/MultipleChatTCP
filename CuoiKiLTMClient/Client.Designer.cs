@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Online = new System.Windows.Forms.CheckedListBox();
             this.txtServerIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.butSend = new System.Windows.Forms.Button();
@@ -42,27 +41,17 @@
             this.lbUser = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.grOnline = new System.Windows.Forms.TabPage();
             this.userOnline = new System.Windows.Forms.TabPage();
             this.butFile = new System.Windows.Forms.Button();
-            this.lstGroup = new System.Windows.Forms.CheckedListBox();
             this.butExit = new System.Windows.Forms.Button();
+            this.lstUser = new System.Windows.Forms.ListBox();
+            this.tabGroup = new System.Windows.Forms.TabPage();
+            this.lstGroup = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.grOnline.SuspendLayout();
             this.userOnline.SuspendLayout();
+            this.tabGroup.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Online
-            // 
-            this.Online.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.Online.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.Online.FormattingEnabled = true;
-            this.Online.Location = new System.Drawing.Point(3, 3);
-            this.Online.Name = "Online";
-            this.Online.Size = new System.Drawing.Size(209, 344);
-            this.Online.TabIndex = 39;
-            this.Online.SelectedIndexChanged += new System.EventHandler(this.Online_SelectedIndexChanged);
             // 
             // txtServerIP
             // 
@@ -209,28 +198,17 @@
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.grOnline);
             this.tabControl.Controls.Add(this.userOnline);
+            this.tabControl.Controls.Add(this.tabGroup);
             this.tabControl.Location = new System.Drawing.Point(4, 78);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(220, 385);
             this.tabControl.TabIndex = 43;
             // 
-            // grOnline
-            // 
-            this.grOnline.Controls.Add(this.lstGroup);
-            this.grOnline.Location = new System.Drawing.Point(4, 25);
-            this.grOnline.Name = "grOnline";
-            this.grOnline.Padding = new System.Windows.Forms.Padding(3);
-            this.grOnline.Size = new System.Drawing.Size(212, 356);
-            this.grOnline.TabIndex = 1;
-            this.grOnline.Text = "Group";
-            this.grOnline.UseVisualStyleBackColor = true;
-            // 
             // userOnline
             // 
-            this.userOnline.Controls.Add(this.Online);
+            this.userOnline.Controls.Add(this.lstUser);
             this.userOnline.Location = new System.Drawing.Point(4, 25);
             this.userOnline.Name = "userOnline";
             this.userOnline.Padding = new System.Windows.Forms.Padding(3);
@@ -249,16 +227,6 @@
             this.butFile.UseVisualStyleBackColor = true;
             this.butFile.Click += new System.EventHandler(this.butFile_Click);
             // 
-            // lstGroup
-            // 
-            this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.lstGroup.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.lstGroup.FormattingEnabled = true;
-            this.lstGroup.Location = new System.Drawing.Point(2, 6);
-            this.lstGroup.Name = "lstGroup";
-            this.lstGroup.Size = new System.Drawing.Size(209, 344);
-            this.lstGroup.TabIndex = 40;
-            // 
             // butExit
             // 
             this.butExit.Location = new System.Drawing.Point(808, 51);
@@ -268,6 +236,40 @@
             this.butExit.Text = "Exit";
             this.butExit.UseVisualStyleBackColor = true;
             this.butExit.Click += new System.EventHandler(this.butExit_Click);
+            // 
+            // lstUser
+            // 
+            this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstUser.FormattingEnabled = true;
+            this.lstUser.ItemHeight = 16;
+            this.lstUser.Location = new System.Drawing.Point(3, 6);
+            this.lstUser.Name = "lstUser";
+            this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstUser.Size = new System.Drawing.Size(206, 340);
+            this.lstUser.TabIndex = 0;
+            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.lstUser_SelectedIndexChanged);
+            // 
+            // tabGroup
+            // 
+            this.tabGroup.Controls.Add(this.lstGroup);
+            this.tabGroup.Location = new System.Drawing.Point(4, 25);
+            this.tabGroup.Name = "tabGroup";
+            this.tabGroup.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGroup.Size = new System.Drawing.Size(212, 356);
+            this.tabGroup.TabIndex = 1;
+            this.tabGroup.Text = "Group";
+            this.tabGroup.UseVisualStyleBackColor = true;
+            // 
+            // lstGroup
+            // 
+            this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstGroup.FormattingEnabled = true;
+            this.lstGroup.ItemHeight = 16;
+            this.lstGroup.Location = new System.Drawing.Point(3, 8);
+            this.lstGroup.Name = "lstGroup";
+            this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstGroup.Size = new System.Drawing.Size(206, 340);
+            this.lstGroup.TabIndex = 1;
             // 
             // Client
             // 
@@ -294,16 +296,14 @@
             this.Text = "Chat Client";
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.grOnline.ResumeLayout(false);
             this.userOnline.ResumeLayout(false);
+            this.tabGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox Online;
         private System.Windows.Forms.TextBox txtServerIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button butSend;
@@ -317,11 +317,12 @@
         private System.Windows.Forms.Label lbUser;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage grOnline;
         private System.Windows.Forms.TabPage userOnline;
         private System.Windows.Forms.Button butFile;
-        private System.Windows.Forms.CheckedListBox lstGroup;
         private System.Windows.Forms.Button butExit;
+        private System.Windows.Forms.ListBox lstUser;
+        private System.Windows.Forms.TabPage tabGroup;
+        private System.Windows.Forms.ListBox lstGroup;
     }
 }
 
