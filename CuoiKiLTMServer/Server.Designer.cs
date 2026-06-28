@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Online = new System.Windows.Forms.CheckedListBox();
             this.butSend = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtBox = new System.Windows.Forms.TextBox();
@@ -38,24 +37,20 @@
             this.lbPort = new System.Windows.Forms.Label();
             this.butStart = new System.Windows.Forms.Button();
             this.lbUser = new System.Windows.Forms.Label();
+            this.Online = new System.Windows.Forms.CheckedListBox();
+            this.butFile = new System.Windows.Forms.Button();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.userOnline = new System.Windows.Forms.TabPage();
+            this.butExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.userOnline.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Online
-            // 
-            this.Online.CheckOnClick = true;
-            this.Online.FormattingEnabled = true;
-            this.Online.Location = new System.Drawing.Point(19, 107);
-            this.Online.Name = "Online";
-            this.Online.Size = new System.Drawing.Size(220, 327);
-            this.Online.TabIndex = 37;
-            this.Online.Click += new System.EventHandler(this.Online_Click);
-            this.Online.DoubleClick += new System.EventHandler(this.Online_DoubleClick);
             // 
             // butSend
             // 
             this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSend.Location = new System.Drawing.Point(705, 410);
+            this.butSend.Location = new System.Drawing.Point(797, 444);
             this.butSend.Name = "butSend";
             this.butSend.Size = new System.Drawing.Size(76, 41);
             this.butSend.TabIndex = 36;
@@ -68,34 +63,36 @@
             // 
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(245, 429);
+            this.txtMessage.Location = new System.Drawing.Point(245, 463);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(454, 22);
+            this.txtMessage.Size = new System.Drawing.Size(546, 22);
             this.txtMessage.TabIndex = 35;
+            this.txtMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessage_KeyPress);
             // 
             // txtBox
             // 
             this.txtBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBox.Location = new System.Drawing.Point(245, 141);
+            this.txtBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtBox.Location = new System.Drawing.Point(245, 113);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(536, 252);
+            this.txtBox.Size = new System.Drawing.Size(546, 344);
             this.txtBox.TabIndex = 34;
             // 
             // numPort
             // 
             this.numPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numPort.Location = new System.Drawing.Point(181, 12);
+            this.numPort.Location = new System.Drawing.Point(604, 8);
             this.numPort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(97, 22);
+            this.numPort.Size = new System.Drawing.Size(123, 22);
             this.numPort.TabIndex = 33;
             this.numPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPort.Value = new decimal(new int[] {
@@ -110,16 +107,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbStatus.BackColor = System.Drawing.SystemColors.Info;
             this.lbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStatus.Location = new System.Drawing.Point(423, 58);
+            this.lbStatus.Location = new System.Drawing.Point(499, 75);
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(206, 35);
+            this.lbStatus.Size = new System.Drawing.Size(292, 28);
             this.lbStatus.TabIndex = 32;
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(307, 65);
+            this.label1.Location = new System.Drawing.Point(396, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 28);
             this.label1.TabIndex = 31;
@@ -129,9 +126,9 @@
             // lbPort
             // 
             this.lbPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPort.Location = new System.Drawing.Point(66, 9);
+            this.lbPort.Location = new System.Drawing.Point(517, 4);
             this.lbPort.Name = "lbPort";
-            this.lbPort.Size = new System.Drawing.Size(109, 48);
+            this.lbPort.Size = new System.Drawing.Size(70, 30);
             this.lbPort.TabIndex = 30;
             this.lbPort.Text = "Port";
             this.lbPort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -140,9 +137,9 @@
             // 
             this.butStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butStart.Location = new System.Drawing.Point(660, 0);
+            this.butStart.Location = new System.Drawing.Point(752, 0);
             this.butStart.Name = "butStart";
-            this.butStart.Size = new System.Drawing.Size(121, 72);
+            this.butStart.Size = new System.Drawing.Size(128, 34);
             this.butStart.TabIndex = 29;
             this.butStart.Text = "Start";
             this.butStart.UseVisualStyleBackColor = true;
@@ -152,18 +149,74 @@
             // 
             this.lbUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lbUser.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUser.Location = new System.Drawing.Point(245, 107);
+            this.lbUser.Location = new System.Drawing.Point(245, 85);
             this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(73, 25);
+            this.lbUser.Size = new System.Drawing.Size(156, 25);
             this.lbUser.TabIndex = 38;
+            // 
+            // Online
+            // 
+            this.Online.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.Online.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Online.CheckOnClick = true;
+            this.Online.FormattingEnabled = true;
+            this.Online.Location = new System.Drawing.Point(6, 6);
+            this.Online.Name = "Online";
+            this.Online.Size = new System.Drawing.Size(200, 327);
+            this.Online.TabIndex = 37;
+            this.Online.Click += new System.EventHandler(this.Online_Click);
+            // 
+            // butFile
+            // 
+            this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butFile.Location = new System.Drawing.Point(797, 364);
+            this.butFile.Name = "butFile";
+            this.butFile.Size = new System.Drawing.Size(76, 74);
+            this.butFile.TabIndex = 39;
+            this.butFile.Text = "Send File";
+            this.butFile.UseVisualStyleBackColor = true;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.userOnline);
+            this.tabControl.Location = new System.Drawing.Point(12, 94);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(220, 372);
+            this.tabControl.TabIndex = 40;
+            // 
+            // userOnline
+            // 
+            this.userOnline.Controls.Add(this.Online);
+            this.userOnline.Location = new System.Drawing.Point(4, 25);
+            this.userOnline.Name = "userOnline";
+            this.userOnline.Padding = new System.Windows.Forms.Padding(3);
+            this.userOnline.Size = new System.Drawing.Size(212, 343);
+            this.userOnline.TabIndex = 0;
+            this.userOnline.Text = "User Online";
+            this.userOnline.UseVisualStyleBackColor = true;
+            // 
+            // butExit
+            // 
+            this.butExit.Location = new System.Drawing.Point(808, 40);
+            this.butExit.Name = "butExit";
+            this.butExit.Size = new System.Drawing.Size(72, 48);
+            this.butExit.TabIndex = 46;
+            this.butExit.Text = "Exit";
+            this.butExit.UseVisualStyleBackColor = true;
+            this.butExit.Click += new System.EventHandler(this.butExit_Click);
             // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(892, 513);
+            this.Controls.Add(this.butExit);
+            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.butFile);
             this.Controls.Add(this.lbUser);
-            this.Controls.Add(this.Online);
             this.Controls.Add(this.butSend);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.txtBox);
@@ -173,17 +226,17 @@
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.butStart);
             this.Name = "Server";
-            this.Text = "Form1";
+            this.Text = "Server Chat";
             this.Load += new System.EventHandler(this.Server_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.userOnline.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox Online;
         private System.Windows.Forms.Button butSend;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.TextBox txtBox;
@@ -193,6 +246,11 @@
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.Button butStart;
         private System.Windows.Forms.Label lbUser;
+        private System.Windows.Forms.CheckedListBox Online;
+        private System.Windows.Forms.Button butFile;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage userOnline;
+        private System.Windows.Forms.Button butExit;
     }
 }
 
