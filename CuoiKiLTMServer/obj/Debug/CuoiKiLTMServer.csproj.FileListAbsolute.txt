@@ -8,3 +8,14 @@ C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTM
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.exe
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.pdb
 C:\Users\Vu Dinh Dung\source\repos\CuoiKiLTM\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.Server.resources
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.exe.config
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.exe
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\bin\Debug\CuoiKiLTMServer.pdb
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.AssemblyReference.cache
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.exe.config
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.Server.resources
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.Properties.Resources.resources
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.GenerateResource.cache
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.csproj.CoreCompileInputs.cache
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.exe
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMServer\obj\Debug\CuoiKiLTMServer.pdb

@@ -71,7 +71,7 @@ namespace CuoiKiLTMServer
                     return;
                 }
                 
-                string msg = Encoding.ASCII.GetString(info.data, 0, receive);
+                string msg = Encoding.UTF8.GetString(info.data, 0, receive);
                 xulitinnhan(info, msg);
                  
                 info.sckInfo.BeginReceive(info.data, 0, info.data.Length, SocketFlags.None, new AsyncCallback(xulydulieu), info);
@@ -89,34 +89,33 @@ namespace CuoiKiLTMServer
             if (part[0] == "login" && part.Length > 1)
             {
                 sender.Username = part[1];
-                //Online.Invoke(new Action(() => Online.Items.Add(sender)));
                 lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
                 UpdateOnlineList();
             }
             else if (part[0] == "msg" && part.Length > 2)
             {
-                string receiver =part[1];
+                string receiver = part[1];
                 string content = part[2];
                 ForwardMessage(
                     sender.Username,
                     receiver,
                     content);
             }
-        }
-
-        void ForwardMessage(string from,string to,string content)  
-        {
-            ClientInfo receiver =  sck.FirstOrDefault( x => x.Username == to);
-            if (receiver == null)
-                return;
-            string packet ="msg|" + from + "|" +content;       
-            try
+         
+            void ForwardMessage(string from, string to, string content)
             {
-                receiver.sckInfo.Send(Encoding.ASCII.GetBytes(packet));
-                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[]{from +" -> " + to +" : " + content });          
-            }
-            catch
-            {
+                ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
+                if (receiver == null)
+                    return;
+                string packet = "msg|" + from + "|" + content;
+                try
+                {
+                    receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
+                    txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + " -> " + to + " : " + content });
+                }
+                catch
+                {
+                }
             }
         }
         delegate void CapNhatGiaoDien(string s);
@@ -132,20 +131,42 @@ namespace CuoiKiLTMServer
 
         private void butSend_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtMessage.Text)) return;
 
-            
             if (SelectedClient != null)
             {
                 SendToSelected(SelectedClient, txtMessage.Text);
             }
-
-             //broatcast ( server không chọn người gửi thì sẽ gửi cho tất cả người dùng online 
-
-            //
-
-            txtMessage.Text = "";
+            else
+            {
+                //broatcast ( server không chọn người gửi thì sẽ gửi cho tất cả người dùng online 
+                BroadcastMessage(txtMessage.Text);
+            }
+           
+                txtMessage.Text = "";
         }
-        //
+        // Hàm thực hiện Broadcast gửi tới tất cả Client
+        void BroadcastMessage(string content)
+        {
+            string packet = "msg|Server|" + content;
+            byte[] data = Encoding.ASCII.GetBytes(packet);
+
+            foreach (ClientInfo client in sck)
+            {
+                try
+                {
+                    if (client.sckInfo != null && client.sckInfo.Connected)
+                    {
+                        client.sckInfo.Send(data);
+                    }
+                }
+                catch
+                {
+                    // Bỏ qua nếu socket client đó bị lỗi ngầm
+                }
+            }
+            CapNhatNoiDungChat("Server (Thông báo chung): " + content);
+        }
         public void CloseClient(ClientInfo client)
         {
             try { client.sckInfo.Shutdown(SocketShutdown.Both); } catch { }
@@ -180,7 +201,7 @@ namespace CuoiKiLTMServer
             }
 
             byte[] packet =
-                Encoding.ASCII.GetBytes(users);
+                Encoding.UTF8.GetBytes(users);
 
             foreach (ClientInfo c in sck)
             {
@@ -193,15 +214,14 @@ namespace CuoiKiLTMServer
                 }
             }
         }
-        //
+      
         void SendToSelected(ClientInfo client, string s)
         {
-            //sửa 6/27/  1:35 
-            string msg = "msg|" +"Server|" + s;
-            client.sckInfo.Send(Encoding.ASCII.GetBytes(msg));
-            CapNhatNoiDungChat("Server: " + msg);
-
+            string msg = "msg|" + "Server|" + s;
+            client.sckInfo.Send(Encoding.UTF8.GetBytes(msg));
+            CapNhatNoiDungChat("Server -> " + client.Username + ": " + s);
         }
+
         private void butSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -209,18 +229,6 @@ namespace CuoiKiLTMServer
                 butSend_Click(sender, e);
             }
         }
-
-        
-        // tao nhom
-        void creatGroup(string groupName,List<ClientInfo> clients)
-        {
-
-        }
-        private void Server_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -232,6 +240,10 @@ namespace CuoiKiLTMServer
         private void butExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void Server_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -248,5 +260,13 @@ namespace CuoiKiLTMServer
                 }
             }
         }
+
+        private void lbStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
+
 }
