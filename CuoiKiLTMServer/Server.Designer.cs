@@ -40,12 +40,12 @@
             this.butFile = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.userOnline = new System.Windows.Forms.TabPage();
-            this.butExit = new System.Windows.Forms.Button();
+            this.lstUser = new System.Windows.Forms.ListBox();
             this.grOnline = new System.Windows.Forms.TabPage();
+            this.lstGroup = new System.Windows.Forms.ListBox();
+            this.butExit = new System.Windows.Forms.Button();
             this.butCreatGroup = new System.Windows.Forms.Button();
             this.butDeleteGroup = new System.Windows.Forms.Button();
-            this.lstUser = new System.Windows.Forms.ListBox();
-            this.lstGroup = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabControl.SuspendLayout();
             this.userOnline.SuspendLayout();
@@ -112,11 +112,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbStatus.BackColor = System.Drawing.SystemColors.Info;
             this.lbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStatus.Location = new System.Drawing.Point(499, 75);
+            this.lbStatus.Location = new System.Drawing.Point(490, 75);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.Size = new System.Drawing.Size(292, 28);
             this.lbStatus.TabIndex = 32;
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // label1
             // 
@@ -190,15 +191,17 @@
             this.userOnline.Text = "User Online";
             this.userOnline.UseVisualStyleBackColor = true;
             // 
-            // butExit
+            // lstUser
             // 
-            this.butExit.Location = new System.Drawing.Point(808, 40);
-            this.butExit.Name = "butExit";
-            this.butExit.Size = new System.Drawing.Size(72, 48);
-            this.butExit.TabIndex = 46;
-            this.butExit.Text = "Exit";
-            this.butExit.UseVisualStyleBackColor = true;
-            this.butExit.Click += new System.EventHandler(this.butExit_Click);
+            this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstUser.FormattingEnabled = true;
+            this.lstUser.ItemHeight = 16;
+            this.lstUser.Location = new System.Drawing.Point(6, 6);
+            this.lstUser.Name = "lstUser";
+            this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstUser.Size = new System.Drawing.Size(200, 324);
+            this.lstUser.TabIndex = 0;
+            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // grOnline
             // 
@@ -210,6 +213,27 @@
             this.grOnline.TabIndex = 1;
             this.grOnline.Text = "Group";
             this.grOnline.UseVisualStyleBackColor = true;
+            // 
+            // lstGroup
+            // 
+            this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lstGroup.FormattingEnabled = true;
+            this.lstGroup.ItemHeight = 16;
+            this.lstGroup.Location = new System.Drawing.Point(6, 9);
+            this.lstGroup.Name = "lstGroup";
+            this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstGroup.Size = new System.Drawing.Size(200, 324);
+            this.lstGroup.TabIndex = 1;
+            // 
+            // butExit
+            // 
+            this.butExit.Location = new System.Drawing.Point(808, 40);
+            this.butExit.Name = "butExit";
+            this.butExit.Size = new System.Drawing.Size(72, 48);
+            this.butExit.TabIndex = 46;
+            this.butExit.Text = "Exit";
+            this.butExit.UseVisualStyleBackColor = true;
+            this.butExit.Click += new System.EventHandler(this.butExit_Click);
             // 
             // butCreatGroup
             // 
@@ -228,29 +252,6 @@
             this.butDeleteGroup.TabIndex = 48;
             this.butDeleteGroup.Text = "Delete Group";
             this.butDeleteGroup.UseVisualStyleBackColor = true;
-            // 
-            // lstUser
-            // 
-            this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.lstUser.FormattingEnabled = true;
-            this.lstUser.ItemHeight = 16;
-            this.lstUser.Location = new System.Drawing.Point(6, 6);
-            this.lstUser.Name = "lstUser";
-            this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstUser.Size = new System.Drawing.Size(200, 324);
-            this.lstUser.TabIndex = 0;
-            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // lstGroup
-            // 
-            this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.lstGroup.FormattingEnabled = true;
-            this.lstGroup.ItemHeight = 16;
-            this.lstGroup.Location = new System.Drawing.Point(6, 9);
-            this.lstGroup.Name = "lstGroup";
-            this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstGroup.Size = new System.Drawing.Size(200, 324);
-            this.lstGroup.TabIndex = 1;
             // 
             // Server
             // 

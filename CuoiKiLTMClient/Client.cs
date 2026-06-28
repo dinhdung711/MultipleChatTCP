@@ -53,7 +53,7 @@ namespace CuoiKiLTMClient
             {
                 username = frm.Username;
                 string login = "login|" + username;
-                info.sckInfo.Send(Encoding.ASCII.GetBytes(login));
+                info.sckInfo.Send(Encoding.UTF8.GetBytes(login));
             }
             catch (SocketException)
             {
@@ -81,7 +81,7 @@ namespace CuoiKiLTMClient
                     info.sckInfo.Close();
                     return;
                 }
-                string msg = Encoding.ASCII.GetString(info.data, 0, receive);
+                string msg = Encoding.UTF8.GetString(info.data, 0, receive);
                 xulitinnhan(info, msg);
                  
                 info.sckInfo.BeginReceive(info.data, 0, info.data.Length, SocketFlags.None, new AsyncCallback(xulydulieu), info);
@@ -134,7 +134,7 @@ namespace CuoiKiLTMClient
                 return;
             }
             string packet ="msg|" +SelectedUser + "|" +txtMessage.Text;
-            sckClient.Send( Encoding.ASCII.GetBytes(packet));
+            sckClient.Send( Encoding.UTF8.GetBytes(packet));
             CapNhatNoiDungChat("Me: " + txtMessage.Text);
             txtMessage.Clear();    
         }
