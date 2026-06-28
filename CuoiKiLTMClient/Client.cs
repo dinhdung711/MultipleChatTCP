@@ -23,7 +23,7 @@ namespace CuoiKiLTMClient
         }
         List<ClientInfo> sck = new List<ClientInfo>();
         Socket sckClient = null;
-        byte[] data = new byte[1024];
+         
     
         private void butConnect_Click(object sender, EventArgs e)
         {
@@ -43,10 +43,8 @@ namespace CuoiKiLTMClient
         private void xulyketnoi(IAsyncResult result)
         {
             sckClient.EndConnect(result);
-            //
             Login frm = new Login();
             frm.ShowDialog();
-            //
             ClientInfo info = new ClientInfo();
             info.sckInfo = sckClient;
             info.data = new byte[1024];
@@ -61,7 +59,6 @@ namespace CuoiKiLTMClient
             {
                 info.sckInfo.Close();
             }
-            //
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "Ket noi thanh cong" });
             lbName.Invoke(new CapNhatGiaoDien(CapNhatTen), new object[] { username });
             sckClient.BeginReceive(info.data, 0, info.data.Length, SocketFlags.None, new AsyncCallback(xulydulieu), info);
@@ -72,8 +69,9 @@ namespace CuoiKiLTMClient
         void xulydulieu(IAsyncResult result)
         {
 
-            var info = result.AsyncState as ClientInfo;//
-            if (info == null) // defensive: missing state
+            //var info = result.AsyncState as ClientInfo;
+            ClientInfo info = (ClientInfo)result.AsyncState;
+            if (info == null) 
                 return;
             try
             {
@@ -83,7 +81,6 @@ namespace CuoiKiLTMClient
                     info.sckInfo.Close();
                     return;
                 }
-                //
                 string msg = Encoding.ASCII.GetString(info.data, 0, receive);
                 xulitinnhan(info, msg);
                  
@@ -97,7 +94,7 @@ namespace CuoiKiLTMClient
 
         }
         void xulitinnhan(ClientInfo sender, string msg)
-        {//
+        {
             string[] part = msg.Split('|');
             if (part.Length == 0) return;
             if (part[0] == "online")
@@ -108,14 +105,7 @@ namespace CuoiKiLTMClient
             {
                 string from = part[1];
                 string content = part[2];
-
-                txtBox.Invoke(
-                    new CapNhatGiaoDien(
-                        CapNhatNoiDungChat),
-                    new object[]
-                    {
-                from + ": " + content
-                    });
+                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat),new object[]{from + ": " + content});                           
             }
         }
 
@@ -143,35 +133,23 @@ namespace CuoiKiLTMClient
                     "Vui lòng chọn người nhận");
                 return;
             }
-
-            string packet =
-                "msg|" +
-                SelectedUser +
-                "|" +
-                txtMessage.Text;
-
-            sckClient.Send(
-                Encoding.ASCII.GetBytes(packet));
-
-            CapNhatNoiDungChat(
-                "Me: " +
-                txtMessage.Text);
-
-            txtMessage.Clear();
+            string packet ="msg|" +SelectedUser + "|" +txtMessage.Text;
+            sckClient.Send( Encoding.ASCII.GetBytes(packet));
+            CapNhatNoiDungChat("Me: " + txtMessage.Text);
+            txtMessage.Clear();    
         }
-        //
+      
         string SelectedUser = "";
         private void Online_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (Online.SelectedItem != null)
             {
-                SelectedUser =
-                    Online.SelectedItem.ToString();
-
-                lbUser.Text =
-                    SelectedUser;
+                SelectedUser = Online.SelectedItem.ToString();
+                lbUser.Text =SelectedUser;
             }
             MessageBox.Show(SelectedUser);
+            //txtBox.Clear();
         }
         
    
@@ -181,9 +159,7 @@ namespace CuoiKiLTMClient
             {
                 Online.Items.Clear();
 
-                string[] ds =
-                    users.Split(',');
-
+                string[] ds = users.Split(',');
                 foreach (string user in ds)
                 {
                     if (user.Trim() != "")
@@ -192,12 +168,19 @@ namespace CuoiKiLTMClient
                     }
                 }
             }));
-        }//
+        }
 
         
         void CapNhatNguoiDung(string s)
         {
             lbUser.Text = s;
+        } 
+        private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                butSend_Click(sender, e);
+            }
         }
          
         private void txtServerIP_TextChanged(object sender, EventArgs e)
@@ -243,6 +226,20 @@ namespace CuoiKiLTMClient
 
         }
 
-       
+        private void lbUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butExit_Click(object sender, EventArgs e)
+        {
+            sckClient.Close();
+            this.Close();
+        }
     }
 }

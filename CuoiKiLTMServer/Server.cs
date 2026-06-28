@@ -23,8 +23,6 @@ namespace CuoiKiLTMServer
         Socket sckServer = null;
         Socket sckClient = null;
         int connection = 0;
-        byte[] data = new byte[1024];
-        int n;
         private void butStart_Click(object sender, EventArgs e)
         {
             if (sckServer != null)
@@ -137,6 +135,11 @@ namespace CuoiKiLTMServer
             {
                 SendToSelected(SelectedClient, txtMessage.Text);
             }
+
+             //broatcast ( server không chọn người gửi thì sẽ gửi cho tất cả người dùng online 
+
+            //
+
             txtMessage.Text = "";
         }
         //
@@ -144,24 +147,18 @@ namespace CuoiKiLTMServer
         {
             try { client.sckInfo.Shutdown(SocketShutdown.Both); } catch { }
             try { client.sckInfo.Close(); } catch { }
+            
             sck.Remove(client);
+            // xoa client tren thanh online
+            Online.Invoke(new Action(() => Online.Items.Remove(client)));
+            //
             connection--;
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "So Client ket noi :" + connection });
             UpdateOnlineList();
         }
        
         ClientInfo SelectedClient = null;
-        private void Online_DoubleClick(object sender, EventArgs e)
-
-        {
-            if (Online.SelectedItem is ClientInfo client)
-            {
-                MessageBox.Show(client.Username);
-                SelectedClient = client;
-                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
-                txtBox.Clear();
-            }
-    }
+       
         void CapNhatNguoiDung(string s)
         {
             lbUser.Text = s;
@@ -194,14 +191,14 @@ namespace CuoiKiLTMServer
             }
         }
         //
-        void SendToSelected(ClientInfo client ,string s)
+        void SendToSelected(ClientInfo client, string s)
         {
-            client.sckInfo.Send(Encoding.ASCII.GetBytes(s));
-            CapNhatNoiDungChat("Server: " +s);
-            
+            //sửa 6/27/  1:35 
+            string msg = "msg|" +"Server|" + s;
+            client.sckInfo.Send(Encoding.ASCII.GetBytes(msg));
+            CapNhatNoiDungChat("Server: " + msg);
 
         }
-
         private void butSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -212,19 +209,36 @@ namespace CuoiKiLTMServer
 
         private void Online_Click(object sender, EventArgs e)
         {
-
-            if (Online.SelectedItem is ClientInfo client)
+            if (tabControl.SelectedTab == userOnline) 
             {
+            if (Online.SelectedItem is ClientInfo client)
+                {
                 MessageBox.Show(client.Username);
                 SelectedClient = client;
                 lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
                 txtBox.Clear();
-            }
+                }
+            } 
         }
 
         private void Server_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                butSend_Click(sender, e);
+            }
+        }
+
+        private void butExit_Click(object sender, EventArgs e)
+        {
+            sckServer.Close();
+            sckClient.Close();
+            this.Close();
         }
     }
 }
