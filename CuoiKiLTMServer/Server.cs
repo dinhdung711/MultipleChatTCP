@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace CuoiKiLTMServer
 {
@@ -19,6 +20,7 @@ namespace CuoiKiLTMServer
             InitializeComponent();
         }
         //
+
         Dictionary<string,List<ClientInfo>> Group = new Dictionary<string,List<ClientInfo>>();
         List<ClientInfo> sck = new List<ClientInfo>();
         //
@@ -82,14 +84,31 @@ namespace CuoiKiLTMServer
                 CloseClient(info);
             }
         }
+
         void xulitinnhan(ClientInfo sender, string msg)
         {
             string[] part = msg.Split('|');
             if (part.Length == 0) return;
             if (part[0] == "login" && part.Length > 1)
             {
+                string username = part[1];
+                bool exists = false; 
+                foreach (ClientInfo c in sck)
+                    {
+                        if (c.Username == username)
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+                if (exists)
+                {
+                    sender.sckInfo.Send(Encoding.UTF8.GetBytes("loginfail"));
+                     return; 
+                }
                 sender.Username = part[1];
                 lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
+                sender.sckInfo.Send(Encoding.UTF8.GetBytes("loginok"));
                 UpdateOnlineList();
             }
             else if (part[0] == "msg" && part.Length > 2)
@@ -101,8 +120,31 @@ namespace CuoiKiLTMServer
                     receiver,
                     content);
             }
-         
-            void ForwardMessage(string from, string to, string content)
+            else if (part[0] == "file")
+            {
+
+                HandleFile(sender, part[1], part[2], long.Parse(part[3]), long.Parse(part[4]));
+            }
+
+        }
+        void HandleFile(ClientInfo sender,string receiverName,string fileName,long fileSize,long numberFrame)
+        {
+            ClientInfo receiver =sck.FirstOrDefault(x => x.Username == receiverName );
+            if (receiver == null)
+            {
+                return;
+            }
+            string file ="file|" +sender.Username + "|" +fileName + "|" +fileSize + "|" +numberFrame;     
+            receiver.sckInfo.Send(Encoding.UTF8.GetBytes(file));
+            byte[] buffer = new byte[1024];
+
+            for (int i = 0; i < numberFrame; i++)
+            {
+                int n = sender.sckInfo.Receive(buffer);
+                receiver.sckInfo.Send( buffer,n,SocketFlags.None);            
+            }
+        }
+        void ForwardMessage(string from, string to, string content)
             {
                 ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
                 if (receiver == null)
@@ -117,7 +159,6 @@ namespace CuoiKiLTMServer
                 {
                 }
             }
-        }
         delegate void CapNhatGiaoDien(string s);
 
         void CapNhatTrangThai(string s)
@@ -214,7 +255,6 @@ namespace CuoiKiLTMServer
                 }
             }
         }
-      
         void SendToSelected(ClientInfo client, string s)
         {
             string msg = "msg|" + "Server|" + s;
@@ -246,7 +286,12 @@ namespace CuoiKiLTMServer
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void lbStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab == userOnline)
             {
@@ -259,14 +304,8 @@ namespace CuoiKiLTMServer
                     txtBox.Clear();
                 }
             }
-        }
-
-        private void lbStatus_Click(object sender, EventArgs e)
-        {
 
         }
-
-       
     }
 
 }

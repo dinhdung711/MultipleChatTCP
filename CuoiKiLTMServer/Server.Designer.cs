@@ -54,8 +54,9 @@
             // 
             // butSend
             // 
-            this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSend.Location = new System.Drawing.Point(797, 444);
+            this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butSend.Location = new System.Drawing.Point(788, 444);
             this.butSend.Name = "butSend";
             this.butSend.Size = new System.Drawing.Size(76, 41);
             this.butSend.TabIndex = 36;
@@ -70,7 +71,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMessage.Location = new System.Drawing.Point(245, 463);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(546, 22);
+            this.txtMessage.Size = new System.Drawing.Size(537, 22);
             this.txtMessage.TabIndex = 35;
             this.txtMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessage_KeyPress);
             // 
@@ -83,7 +84,7 @@
             this.txtBox.Location = new System.Drawing.Point(245, 113);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(546, 344);
+            this.txtBox.Size = new System.Drawing.Size(537, 344);
             this.txtBox.TabIndex = 34;
             // 
             // numPort
@@ -163,9 +164,9 @@
             // butFile
             // 
             this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butFile.Location = new System.Drawing.Point(797, 364);
+            this.butFile.Location = new System.Drawing.Point(788, 364);
             this.butFile.Name = "butFile";
-            this.butFile.Size = new System.Drawing.Size(76, 74);
+            this.butFile.Size = new System.Drawing.Size(85, 74);
             this.butFile.TabIndex = 39;
             this.butFile.Text = "Send File";
             this.butFile.UseVisualStyleBackColor = true;
@@ -201,7 +202,7 @@
             this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstUser.Size = new System.Drawing.Size(200, 324);
             this.lstUser.TabIndex = 0;
-            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.lstUser_SelectedIndexChanged);
             // 
             // grOnline
             // 
@@ -227,6 +228,8 @@
             // 
             // butExit
             // 
+            this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.butExit.Location = new System.Drawing.Point(808, 40);
             this.butExit.Name = "butExit";
             this.butExit.Size = new System.Drawing.Size(72, 48);
@@ -237,18 +240,22 @@
             // 
             // butCreatGroup
             // 
-            this.butCreatGroup.Location = new System.Drawing.Point(797, 290);
+            this.butCreatGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butCreatGroup.Location = new System.Drawing.Point(788, 290);
             this.butCreatGroup.Name = "butCreatGroup";
-            this.butCreatGroup.Size = new System.Drawing.Size(76, 68);
+            this.butCreatGroup.Size = new System.Drawing.Size(85, 68);
             this.butCreatGroup.TabIndex = 47;
             this.butCreatGroup.Text = "Creat Group";
             this.butCreatGroup.UseVisualStyleBackColor = true;
             // 
             // butDeleteGroup
             // 
-            this.butDeleteGroup.Location = new System.Drawing.Point(797, 216);
+            this.butDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDeleteGroup.Location = new System.Drawing.Point(788, 209);
             this.butDeleteGroup.Name = "butDeleteGroup";
-            this.butDeleteGroup.Size = new System.Drawing.Size(76, 68);
+            this.butDeleteGroup.Size = new System.Drawing.Size(85, 75);
             this.butDeleteGroup.TabIndex = 48;
             this.butDeleteGroup.Text = "Delete Group";
             this.butDeleteGroup.UseVisualStyleBackColor = true;
