@@ -41,6 +41,7 @@
             this.txtUser.Size = new System.Drawing.Size(119, 22);
             this.txtUser.TabIndex = 0;
             this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
+            this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUser_KeyPress);
             // 
             // label1
             // 
