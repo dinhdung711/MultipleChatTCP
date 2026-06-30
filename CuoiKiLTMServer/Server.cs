@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Microsoft.VisualBasic;
 
 namespace CuoiKiLTMServer
@@ -20,6 +21,7 @@ namespace CuoiKiLTMServer
             InitializeComponent();
         }
         //
+
         Dictionary<string,List<ClientInfo>> Group = new Dictionary<string,List<ClientInfo>>();
         List<ClientInfo> groupMembers = new List<ClientInfo>();
         List<ClientInfo> sck = new List<ClientInfo>();
@@ -84,14 +86,31 @@ namespace CuoiKiLTMServer
                 CloseClient(info);
             }
         }
+
         void xulitinnhan(ClientInfo sender, string msg)
         {
             string[] part = msg.Split('|');
             if (part.Length == 0) return;
             if (part[0] == "login" && part.Length > 1)
             {
+                string username = part[1];
+                bool exists = false; 
+                foreach (ClientInfo c in sck)
+                    {
+                        if (c.Username == username)
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+                if (exists)
+                {
+                    sender.sckInfo.Send(Encoding.UTF8.GetBytes("loginfail"));
+                     return; 
+                }
                 sender.Username = part[1];
                 lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
+                sender.sckInfo.Send(Encoding.UTF8.GetBytes("loginok"));
                 UpdateOnlineList();
                 UpdateGroupList();
             }
@@ -103,7 +122,6 @@ namespace CuoiKiLTMServer
             {
                 string receiver = part[1];
                 string content = part[2];
-
                 if (Group.ContainsKey(receiver))
                 {
                     string packet = "msg|" + "[" + receiver + "] " + sender.Username + "|" + content;
@@ -113,8 +131,8 @@ namespace CuoiKiLTMServer
                     {
                         try
                         {
-                            if (member.Username != sender.Username && member.sckInfo != null && member.sckInfo.Connected)                           
-                                {
+                            if (member.Username != sender.Username && member.sckInfo != null && member.sckInfo.Connected)
+                            {
                                 member.sckInfo.Send(data);
                             }
                         }
@@ -126,22 +144,48 @@ namespace CuoiKiLTMServer
                 {
                     ForwardMessage(sender.Username, receiver, content);
                 }
+                 
             }
-        } 
-
-        void ForwardMessage(string from, string to, string content)
-        {
-            ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
-            if (receiver == null) return;
-
-            string packet = "msg|" + from + "|" + content;
-            try
+            else if (part[0] == "file")
             {
-                receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
-                txtBox.Invoke(new Action(() => { CapNhatNoiDungChat(from + " -> " + to + " : " + content); }));
+
+                HandleFile(sender, part[1], part[2], long.Parse(part[3]), long.Parse(part[4]));
             }
-            catch { }
+
         }
+        void HandleFile(ClientInfo sender,string receiverName,string fileName,long fileSize,long numberFrame)
+        {
+            ClientInfo receiver =sck.FirstOrDefault(x => x.Username == receiverName );
+            if (receiver == null)
+            {
+                return;
+            }
+            string file ="file|" +sender.Username + "|" +fileName + "|" +fileSize + "|" +numberFrame;     
+            receiver.sckInfo.Send(Encoding.UTF8.GetBytes(file));
+            byte[] buffer = new byte[1024];
+
+            for (int i = 0; i < numberFrame; i++)
+            {
+                int n = sender.sckInfo.Receive(buffer);
+                receiver.sckInfo.Send( buffer,n,SocketFlags.None);            
+            }
+        }
+        void ForwardMessage(string from, string to, string content)
+            {
+                ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
+                if (receiver == null)
+                    return;
+                string packet = "msg|" + from + "|" + content;
+                try
+                {
+                    receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
+                    txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + " -> " + to + " : " + content });
+                }
+                catch
+                {
+                }
+            }
+       
         delegate void CapNhatGiaoDien(string s);
 
         void CapNhatTrangThai(string s)
@@ -157,8 +201,7 @@ namespace CuoiKiLTMServer
         {
             if (string.IsNullOrEmpty(txtMessage.Text)) return;
 
-            // 1. KIỂM TRA XEM CÓ ĐANG CHỌN GỬI CHO NHÓM HAY KHÔNG
-            if (!string.IsNullOrEmpty(lbUser.Text) && Group.ContainsKey(lbUser.Text))
+            if (SelectedClient != null)
             {
                 string groupName = lbUser.Text;
                 string packet = "msg|Server (Nhóm " + groupName + ")|" + txtMessage.Text;
@@ -271,7 +314,6 @@ namespace CuoiKiLTMServer
                 }
             }
         }
-      
         void SendToSelected(ClientInfo client, string s)
         {
             string msg = "msg|" + "Server|" + s;
@@ -328,16 +370,26 @@ namespace CuoiKiLTMServer
         }
         private void Server_Load(object sender, EventArgs e)
         {
-            // FIX LỖI 1: Bắt buộc kích hoạt tính năng giữ Ctrl/Shift chọn nhiều dòng trên ListBox
-            lstUser.SelectionMode = SelectionMode.MultiExtended;
 
-            // FIX LỖI 3: Đăng ký sự kiện chuyển Tab tự làm mới danh sách (Tránh đè chồng dữ liệu)
-            if (tabControl != null)
-            {
-                tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-            }
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstUser.SelectedItem == null) return;
+
+            // Trường hợp 1: Chọn một Client cá nhân để chat riêng (Giữ cũ)
+            if (lstUser.SelectedItem is ClientInfo client)
+            {
+                SelectedClient = client;
+                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
+                txtBox.Clear();
+            }
+        }
         // TỰ ĐỘNG LÀM MỚI DANH SÁCH LSTUSER MỖI KHI BẤM CHUYỂN TAB
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -353,18 +405,7 @@ namespace CuoiKiLTMServer
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lstUser.SelectedItem == null) return;
-
-            // Trường hợp 1: Chọn một Client cá nhân để chat riêng (Giữ cũ)
-            if (lstUser.SelectedItem is ClientInfo client)
-            {
-                SelectedClient = client;
-                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
-                txtBox.Clear();
-            }
-        }
+       
     
         private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -377,10 +418,7 @@ namespace CuoiKiLTMServer
         }
 
 
-        private void lbStatus_Click(object sender, EventArgs e)
-        {
-
-        }
+   
         // 1. SỰ KIỆN KHI SERVER BẤM NÚT "CREAT GROUP"
         private void butCreatGroup_Click(object sender, EventArgs e)
         {

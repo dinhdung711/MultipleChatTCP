@@ -55,6 +55,9 @@
             // 
             // butSend
             // 
+            this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butSend.Location = new System.Drawing.Point(788, 444);
             this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSend.Location = new System.Drawing.Point(789, 443);
             this.butSend.Name = "butSend";
@@ -118,7 +121,6 @@
             this.lbStatus.Size = new System.Drawing.Size(293, 28);
             this.lbStatus.TabIndex = 32;
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // label1
             // 
@@ -206,7 +208,7 @@
             this.lstUser.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstUser.Size = new System.Drawing.Size(200, 324);
             this.lstUser.TabIndex = 0;
-            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.lstUser.SelectedIndexChanged += new System.EventHandler(this.lstUser_SelectedIndexChanged);
             // 
             // grOnline
             // 
@@ -250,6 +252,7 @@
             this.butCreatGroup.Location = new System.Drawing.Point(789, 290);
             this.butCreatGroup.Name = "butCreatGroup";
             this.butCreatGroup.Size = new System.Drawing.Size(84, 68);
+ 
             this.butCreatGroup.TabIndex = 47;
             this.butCreatGroup.Text = "Creat Group";
             this.butCreatGroup.UseVisualStyleBackColor = true;
@@ -261,6 +264,7 @@
             this.butDeleteGroup.Location = new System.Drawing.Point(789, 216);
             this.butDeleteGroup.Name = "butDeleteGroup";
             this.butDeleteGroup.Size = new System.Drawing.Size(84, 68);
+ 
             this.butDeleteGroup.TabIndex = 48;
             this.butDeleteGroup.Text = "Delete Group";
             this.butDeleteGroup.UseVisualStyleBackColor = true;

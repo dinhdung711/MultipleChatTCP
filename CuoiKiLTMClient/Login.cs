@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CuoiKiLTMClient
 {
@@ -41,6 +42,14 @@ namespace CuoiKiLTMClient
         void txtUser_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                butLogin_Click(sender, e);
+            }
         }
     }
 }
