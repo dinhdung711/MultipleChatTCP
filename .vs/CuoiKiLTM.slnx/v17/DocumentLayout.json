@@ -65,7 +65,7 @@
               "RelativeDocumentMoniker": "CuoiKiLTMServer\\Server.cs",
               "ToolTip": "C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\CuoiKiLTMServer\\Server.cs",
               "RelativeToolTip": "CuoiKiLTMServer\\Server.cs",
-              "ViewState": "AgIAALwBAAAAAAAAAAAswM4BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAgwIIBAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-28T16:47:23.604Z",
               "EditorCaption": ""
@@ -80,8 +80,7 @@
               "RelativeToolTip": "CuoiKiLTMClient\\Client.cs",
               "ViewState": "AgIAALUAAAAAAAAAAAAewL0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T16:46:58.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-28T16:46:58.938Z"
             },
             {
               "$type": "Document",
@@ -92,8 +91,7 @@
               "ToolTip": "C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\CuoiKiLTMClient\\Client.cs [Design]",
               "RelativeToolTip": "CuoiKiLTMClient\\Client.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T16:46:54.207Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-06-28T16:46:54.207Z"
             }
           ]
         }

@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|solutionrelative:cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|solutionrelative:cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -47,7 +47,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Server.cs [Design]",
               "DocumentMoniker": "C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\CuoiKiLTMServer\\Server.cs",
               "RelativeDocumentMoniker": "CuoiKiLTMServer\\Server.cs",
@@ -65,14 +65,14 @@
               "RelativeDocumentMoniker": "CuoiKiLTMServer\\Server.cs",
               "ToolTip": "C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\CuoiKiLTMServer\\Server.cs",
               "RelativeToolTip": "CuoiKiLTMServer\\Server.cs",
-              "ViewState": "AgIAAKQBAAAAAAAAAAAswLsBAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAALwBAAAAAAAAAAAswM4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-28T16:47:23.604Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Client.cs",
               "DocumentMoniker": "C:\\NhanNguyen\\LTMANG-ThayQuocAnh\\MultipleChatTCP\\CuoiKiLTMClient\\Client.cs",
               "RelativeDocumentMoniker": "CuoiKiLTMClient\\Client.cs",
