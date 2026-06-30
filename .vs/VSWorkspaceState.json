@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\CuoiKiLTMClient",
+    "\\CuoiKiLTMClient\\bin",
+    "\\CuoiKiLTMClient\\bin\\Debug",
     "\\CuoiKiLTMServer"
   ],
-  "SelectedNode": "\\CuoiKiLTM.slnx",
+  "SelectedNode": "\\CuoiKiLTMServer\\Server.cs",
   "PreviewInSolutionExplorer": false
 }

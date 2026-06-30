@@ -46,6 +46,7 @@
             this.butExit = new System.Windows.Forms.Button();
             this.butCreatGroup = new System.Windows.Forms.Button();
             this.butDeleteGroup = new System.Windows.Forms.Button();
+            this.butClearSelect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabControl.SuspendLayout();
             this.userOnline.SuspendLayout();
@@ -57,8 +58,10 @@
             this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.butSend.Location = new System.Drawing.Point(788, 444);
+            this.butSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butSend.Location = new System.Drawing.Point(789, 443);
             this.butSend.Name = "butSend";
-            this.butSend.Size = new System.Drawing.Size(76, 41);
+            this.butSend.Size = new System.Drawing.Size(85, 41);
             this.butSend.TabIndex = 36;
             this.butSend.Text = "Send";
             this.butSend.UseVisualStyleBackColor = true;
@@ -69,9 +72,10 @@
             // 
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(245, 463);
+            this.txtMessage.Location = new System.Drawing.Point(245, 462);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(537, 22);
+            this.txtMessage.Size = new System.Drawing.Size(538, 22);
             this.txtMessage.TabIndex = 35;
             this.txtMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessage_KeyPress);
             // 
@@ -85,6 +89,7 @@
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(537, 344);
+            this.txtBox.Size = new System.Drawing.Size(538, 343);
             this.txtBox.TabIndex = 34;
             // 
             // numPort
@@ -98,7 +103,7 @@
             0,
             0});
             this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(123, 22);
+            this.numPort.Size = new System.Drawing.Size(124, 22);
             this.numPort.TabIndex = 33;
             this.numPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPort.Value = new decimal(new int[] {
@@ -115,10 +120,10 @@
             this.lbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStatus.Location = new System.Drawing.Point(490, 75);
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(292, 28);
+            this.lbStatus.Size = new System.Drawing.Size(293, 28);
             this.lbStatus.TabIndex = 32;
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
+            //this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // label1
             // 
@@ -144,7 +149,7 @@
             // 
             this.butStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butStart.Location = new System.Drawing.Point(752, 0);
+            this.butStart.Location = new System.Drawing.Point(753, 0);
             this.butStart.Name = "butStart";
             this.butStart.Size = new System.Drawing.Size(128, 34);
             this.butStart.TabIndex = 29;
@@ -164,8 +169,11 @@
             // butFile
             // 
             this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+ 
             this.butFile.Location = new System.Drawing.Point(788, 364);
-            this.butFile.Name = "butFile";
+ 
+            this.butFile.Location = new System.Drawing.Point(789, 363);
+             this.butFile.Name = "butFile";
             this.butFile.Size = new System.Drawing.Size(85, 74);
             this.butFile.TabIndex = 39;
             this.butFile.Text = "Send File";
@@ -173,6 +181,8 @@
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl.Controls.Add(this.userOnline);
             this.tabControl.Controls.Add(this.grOnline);
             this.tabControl.Location = new System.Drawing.Point(12, 94);
@@ -194,6 +204,8 @@
             // 
             // lstUser
             // 
+            this.lstUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.lstUser.FormattingEnabled = true;
             this.lstUser.ItemHeight = 16;
@@ -217,6 +229,8 @@
             // 
             // lstGroup
             // 
+            this.lstGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.lstGroup.FormattingEnabled = true;
             this.lstGroup.ItemHeight = 16;
@@ -225,11 +239,16 @@
             this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstGroup.Size = new System.Drawing.Size(200, 324);
             this.lstGroup.TabIndex = 1;
+            this.lstGroup.SelectedIndexChanged += new System.EventHandler(this.lstGroup_SelectedIndexChanged);
             // 
             // butExit
             // 
+ 
             this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+ 
+            this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+ 
             this.butExit.Location = new System.Drawing.Point(808, 40);
             this.butExit.Name = "butExit";
             this.butExit.Size = new System.Drawing.Size(72, 48);
@@ -240,32 +259,60 @@
             // 
             // butCreatGroup
             // 
+ 
             this.butCreatGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.butCreatGroup.Location = new System.Drawing.Point(788, 290);
             this.butCreatGroup.Name = "butCreatGroup";
             this.butCreatGroup.Size = new System.Drawing.Size(85, 68);
+ 
+            this.butCreatGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butCreatGroup.Location = new System.Drawing.Point(789, 290);
+            this.butCreatGroup.Name = "butCreatGroup";
+            this.butCreatGroup.Size = new System.Drawing.Size(84, 68);
+ 
             this.butCreatGroup.TabIndex = 47;
             this.butCreatGroup.Text = "Creat Group";
             this.butCreatGroup.UseVisualStyleBackColor = true;
+            this.butCreatGroup.Click += new System.EventHandler(this.butCreatGroup_Click);
             // 
             // butDeleteGroup
             // 
+  
             this.butDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.butDeleteGroup.Location = new System.Drawing.Point(788, 209);
             this.butDeleteGroup.Name = "butDeleteGroup";
             this.butDeleteGroup.Size = new System.Drawing.Size(85, 75);
+ 
+            this.butDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDeleteGroup.Location = new System.Drawing.Point(789, 216);
+            this.butDeleteGroup.Name = "butDeleteGroup";
+            this.butDeleteGroup.Size = new System.Drawing.Size(84, 68);
+ 
             this.butDeleteGroup.TabIndex = 48;
             this.butDeleteGroup.Text = "Delete Group";
             this.butDeleteGroup.UseVisualStyleBackColor = true;
+            this.butDeleteGroup.Click += new System.EventHandler(this.butDeleteGroup_Click);
+            // 
+            // butClearSelect
+            // 
+            this.butClearSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butClearSelect.Location = new System.Drawing.Point(789, 142);
+            this.butClearSelect.Name = "butClearSelect";
+            this.butClearSelect.Size = new System.Drawing.Size(84, 67);
+            this.butClearSelect.TabIndex = 49;
+            this.butClearSelect.Text = "Broatcast";
+            this.butClearSelect.UseVisualStyleBackColor = true;
+            this.butClearSelect.Click += new System.EventHandler(this.butBroadcastSelect_Click);
             // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(892, 513);
+            this.ClientSize = new System.Drawing.Size(893, 512);
+            this.Controls.Add(this.butClearSelect);
             this.Controls.Add(this.butDeleteGroup);
             this.Controls.Add(this.butCreatGroup);
             this.Controls.Add(this.butExit);
@@ -311,6 +358,7 @@
         private System.Windows.Forms.Button butDeleteGroup;
         private System.Windows.Forms.ListBox lstUser;
         private System.Windows.Forms.ListBox lstGroup;
+        private System.Windows.Forms.Button butClearSelect;
     }
 }
 

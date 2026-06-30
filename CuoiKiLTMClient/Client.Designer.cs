@@ -42,11 +42,11 @@
             this.lbName = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.userOnline = new System.Windows.Forms.TabPage();
-            this.butFile = new System.Windows.Forms.Button();
-            this.butExit = new System.Windows.Forms.Button();
             this.lstUser = new System.Windows.Forms.ListBox();
             this.tabGroup = new System.Windows.Forms.TabPage();
             this.lstGroup = new System.Windows.Forms.ListBox();
+            this.butFile = new System.Windows.Forms.Button();
+            this.butExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabControl.SuspendLayout();
             this.userOnline.SuspendLayout();
@@ -198,6 +198,8 @@
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl.Controls.Add(this.userOnline);
             this.tabControl.Controls.Add(this.tabGroup);
             this.tabControl.Location = new System.Drawing.Point(4, 78);
@@ -217,28 +219,10 @@
             this.userOnline.Text = "User Online";
             this.userOnline.UseVisualStyleBackColor = true;
             // 
-            // butFile
-            // 
-            this.butFile.Location = new System.Drawing.Point(797, 365);
-            this.butFile.Name = "butFile";
-            this.butFile.Size = new System.Drawing.Size(76, 73);
-            this.butFile.TabIndex = 44;
-            this.butFile.Text = "Send File";
-            this.butFile.UseVisualStyleBackColor = true;
-            this.butFile.Click += new System.EventHandler(this.butFile_Click);
-            // 
-            // butExit
-            // 
-            this.butExit.Location = new System.Drawing.Point(808, 51);
-            this.butExit.Name = "butExit";
-            this.butExit.Size = new System.Drawing.Size(72, 48);
-            this.butExit.TabIndex = 45;
-            this.butExit.Text = "Exit";
-            this.butExit.UseVisualStyleBackColor = true;
-            this.butExit.Click += new System.EventHandler(this.butExit_Click);
-            // 
             // lstUser
             // 
+            this.lstUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstUser.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.lstUser.FormattingEnabled = true;
             this.lstUser.ItemHeight = 16;
@@ -262,6 +246,8 @@
             // 
             // lstGroup
             // 
+            this.lstGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstGroup.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.lstGroup.FormattingEnabled = true;
             this.lstGroup.ItemHeight = 16;
@@ -270,6 +256,29 @@
             this.lstGroup.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstGroup.Size = new System.Drawing.Size(206, 340);
             this.lstGroup.TabIndex = 1;
+            this.lstGroup.SelectedIndexChanged += new System.EventHandler(this.lstGroup_SelectedIndexChanged);
+            // 
+            // butFile
+            // 
+            this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butFile.Location = new System.Drawing.Point(797, 365);
+            this.butFile.Name = "butFile";
+            this.butFile.Size = new System.Drawing.Size(76, 73);
+            this.butFile.TabIndex = 44;
+            this.butFile.Text = "Send File";
+            this.butFile.UseVisualStyleBackColor = true;
+            this.butFile.Click += new System.EventHandler(this.butFile_Click);
+            // 
+            // butExit
+            // 
+            this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.butExit.Location = new System.Drawing.Point(808, 51);
+            this.butExit.Name = "butExit";
+            this.butExit.Size = new System.Drawing.Size(72, 48);
+            this.butExit.TabIndex = 45;
+            this.butExit.Text = "Exit";
+            this.butExit.UseVisualStyleBackColor = true;
+            this.butExit.Click += new System.EventHandler(this.butExit_Click);
             // 
             // Client
             // 

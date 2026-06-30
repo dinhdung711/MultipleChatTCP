@@ -149,9 +149,34 @@ namespace CuoiKiLTMClient
                     receiveFile(part[1], part[2], long.Parse(part[3]), long.Parse(part[4]));
                 }
             }
+            // Client chỉ nhận danh sách nhóm công khai từ Server gửi xuống để hiển thị
+            else if (part[0] == "grouplist")
+            {
+                updateGroup(part[1]);
+            }
+            //dung
+            else if (part[0] == "creategroup")
+            {
+                string grname = part[1];
+                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { "ban da duoc them vao " + grname });
+            }
+            //dung
+            else if (part[0] == "msg" && part.Length >= 3)
+            {
+                string from = part[1];
+                string content = part[2];
+                SaveMessage(from, from + ": " + content);
+                if (SelectedUser == from)
+                {
+                    receiveFile(part[1], part[2], long.Parse(part[3]), long.Parse(part[4]));
+                }
+                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + ": " + content });
+            }
+            
         }
 
         delegate void CapNhatGiaoDien(string s);
+
         void CapNhatTrangThai(string s)
         {
             lbStatus.Text = s;
@@ -168,6 +193,20 @@ namespace CuoiKiLTMClient
 
         private void butSend_Click(object sender, EventArgs e)
         {
+            if (tabControl.SelectedTab == tabGroup)
+            {
+                if (lstGroup.SelectedItem != null)
+                {
+                    SelectedUser = lstGroup.SelectedItem.ToString();
+                }
+            }
+            else 
+            {
+                if (lstUser.SelectedItem != null)
+                {
+                    SelectedUser = lstUser.SelectedItem.ToString();
+                }
+            }
 
             if (SelectedUser == "")
             {
@@ -188,6 +227,7 @@ namespace CuoiKiLTMClient
 
         void updateOnline(string users)
         {
+        
             lstUser.Invoke(new Action(() =>
             {
                 lstUser.Items.Clear();
@@ -195,16 +235,32 @@ namespace CuoiKiLTMClient
                 string[] ds = users.Split(',');
                 foreach (string user in ds)
                 {
-                    if (user.Trim() != "")
+
+                    if (user.Trim() != "" && user.Trim() != "grouplist")
                     {
-                        if (user != myName)
-                        {
-                            lstUser.Items.Add(user);
-                        }
+                        lstUser.Items.Add(user);
                     }
                 }
             }));
         }
+        void updateGroup(string group)
+        {
+            lstGroup.Invoke(new Action(() =>
+            {
+                lstGroup.Items.Clear();
+
+                    string[] dsNhom =group.Split(',');
+                    foreach (string nhom in dsNhom)
+                    {
+                        if (!string.IsNullOrEmpty(nhom.Trim()))
+                        {
+                            lstGroup.Items.Add(nhom.Trim());
+                        }
+                    }
+                
+            }));
+        }
+
         private void lstUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab == userOnline)
@@ -222,7 +278,7 @@ namespace CuoiKiLTMClient
                         txtBox.AppendText(msg + "\r\n"); 
                     }
                 }
-
+            
             }
         }
 
@@ -360,6 +416,14 @@ namespace CuoiKiLTMClient
         private void lbUser_Click(object sender, EventArgs e)
         {
 
+        }
+        private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstGroup.SelectedItem != null)
+            {
+                SelectedUser = lstGroup.SelectedItem.ToString();
+                lbUser.Text = SelectedUser;
+            }
         }
     }
 }
