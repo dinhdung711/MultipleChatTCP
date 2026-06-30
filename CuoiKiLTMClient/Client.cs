@@ -115,11 +115,11 @@ namespace CuoiKiLTMClient
                         Encoding.UTF8.GetBytes(login));
                 }
             }
-            if (msg == "loginok")
+            else if (msg == "loginok")
             {
                 lbName.Invoke(new CapNhatGiaoDien(CapNhatTen), new object[] { myName });
             }
-            if (part[0] == "online")
+            else if (part[0] == "online")
             {
                 updateOnline(part[1]);
             }
@@ -154,25 +154,34 @@ namespace CuoiKiLTMClient
             {
                 updateGroup(part[1]);
             }
-            //dung
+            
             else if (part[0] == "creategroup")
             {
                 string grname = part[1];
-                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { "ban da duoc them vao " + grname });
+                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { "Bạn đã được thêm vào nhóm: " + grname });
             }
-            //dung
-            else if (part[0] == "msg" && part.Length >= 3)
+           //ms sua 
+            else if (part[0] == "grmsg" )
             {
-                string from = part[1];
-                string content = part[2];
-                SaveMessage(from, from + ": " + content);
-                if (SelectedUser == from)
+                //
+                string grName = part[1];
+                string from = part[2];
+                string content = part[3];
+                SaveGroupMessage(grName, from + ": " + content);
+                if (SelectedGroup == grName)
                 {
-                    receiveFile(part[1], part[2], long.Parse(part[3]), long.Parse(part[4]));
+                    txtBox.Invoke(
+                        new CapNhatGiaoDien(CapNhatNoiDungChat),
+                        new object[]
+                        {
+                from + ": " + content
+                        });
                 }
-                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + ": " + content });
+                //
+                //txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { grName + "[" + from + "]" + ": " + content });
             }
-            
+
+
         }
 
         delegate void CapNhatGiaoDien(string s);
@@ -197,7 +206,12 @@ namespace CuoiKiLTMClient
             {
                 if (lstGroup.SelectedItem != null)
                 {
-                    SelectedUser = lstGroup.SelectedItem.ToString();
+                    SelectedGroup = lstGroup.SelectedItem.ToString();
+                    string packet = "grmsg|" + SelectedGroup + "|" + txtMessage.Text;
+                    sckClient.Send(Encoding.UTF8.GetBytes(packet));
+                    SaveGroupMessage(SelectedGroup, "Me: " + txtMessage.Text);
+                    CapNhatNoiDungChat("Me: " + txtMessage.Text);
+                    txtMessage.Clear();
                 }
             }
             else 
@@ -205,20 +219,19 @@ namespace CuoiKiLTMClient
                 if (lstUser.SelectedItem != null)
                 {
                     SelectedUser = lstUser.SelectedItem.ToString();
+                    string packet = "msg|" + SelectedUser + "|" + txtMessage.Text;
+                    sckClient.Send(Encoding.UTF8.GetBytes(packet));
+                    SaveMessage(SelectedUser, "Me: " + txtMessage.Text);
+                    CapNhatNoiDungChat("Me: " + txtMessage.Text);
+                    txtMessage.Clear();
                 }
-            }
-
-            if (SelectedUser == "")
-            {
+                  if (SelectedUser == "")
+                {
                 MessageBox.Show(
                     "Vui lòng chọn người nhận");
                 return;
-            }
-            string packet = "msg|" + SelectedUser + "|" + txtMessage.Text;
-            sckClient.Send(Encoding.UTF8.GetBytes(packet));
-            SaveMessage(SelectedUser, "Me: " + txtMessage.Text);
-            CapNhatNoiDungChat("Me: " + txtMessage.Text);
-            txtMessage.Clear();
+                }
+            } 
         }
 
         string SelectedUser = "";
@@ -282,6 +295,26 @@ namespace CuoiKiLTMClient
                     }
                 }
             
+            }
+        }
+        string SelectedGroup="";
+        private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabGroup)
+            {
+                if (lstGroup.SelectedItem != null)
+                {
+                    SelectedGroup = lstGroup.SelectedItem.ToString();
+                    lbUser.Text = SelectedGroup;
+                }
+                txtBox.Clear();
+                if (GroupHistory.ContainsKey(SelectedGroup))
+                {
+                    foreach (string msg in GroupHistory[SelectedGroup])
+                    {
+                        txtBox.AppendText(msg + "\r\n");
+                    }
+                }
             }
         }
 
@@ -363,15 +396,26 @@ namespace CuoiKiLTMClient
 
         //luu lịch sử tin nhắn
         Dictionary<string, List<string>> ChatHistory = new Dictionary<string, List<string>>();
-
+        Dictionary<string, List<string>> GroupHistory = new Dictionary<string, List<string>>();
+    
         void SaveMessage(string user, string message)
         { 
             if (!ChatHistory.ContainsKey(user)) 
             { 
                 ChatHistory[user] = new List<string>(); 
             } 
-            ChatHistory[user].Add(message); }
+            ChatHistory[user].Add(message); 
+        }
 
+        void SaveGroupMessage(string groupName, string message)
+        {
+            if (!GroupHistory.ContainsKey(groupName))
+            {
+                GroupHistory[groupName] = new List<string>();
+            }
+
+            GroupHistory[groupName].Add(message);
+        }
         //luu lịch sử tin nhắn
 
 
@@ -420,13 +464,6 @@ namespace CuoiKiLTMClient
         {
 
         }
-        private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lstGroup.SelectedItem != null)
-            {
-                SelectedUser = lstGroup.SelectedItem.ToString();
-                lbUser.Text = SelectedUser;
-            }
-        }
+        
     }
 }

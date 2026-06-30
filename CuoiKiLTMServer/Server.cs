@@ -122,12 +122,20 @@ namespace CuoiKiLTMServer
             {
                 string receiver = part[1];
                 string content = part[2];
-                if (Group.ContainsKey(receiver))
+                    ForwardMessage(sender.Username, receiver, content);
+                //}
+
+            }
+            else if (part[0] == "grmsg")
+            {
+                string grName = part[1];
+                string content = part[2];
+                if (Group.ContainsKey(grName))
                 {
-                    string packet = "msg|" + "[" + receiver + "] " + sender.Username + "|" + content;
+                    string packet = "grmsg|" + grName + "|" + sender.Username + "|" + content;
                     byte[] data = Encoding.UTF8.GetBytes(packet);
 
-                    foreach (ClientInfo member in Group[receiver])
+                    foreach (ClientInfo member in Group[grName])
                     {
                         try
                         {
@@ -138,13 +146,8 @@ namespace CuoiKiLTMServer
                         }
                         catch { }
                     }
-                    txtBox.Invoke(new Action(() => { CapNhatNoiDungChat(sender.Username + " -> Nhóm [" + receiver + "]: " + content); }));
+                    txtBox.Invoke(new Action(() => { CapNhatNoiDungChat(sender.Username + " -> Nhóm [" + grName + "]: " + content); }));
                 }
-                else
-                {
-                    ForwardMessage(sender.Username, receiver, content);
-                }
-
             }
             else if (part[0] == "file")
             {
@@ -153,6 +156,9 @@ namespace CuoiKiLTMServer
             }
 
         }
+        // luu tin nhan nhom
+        Dictionary<string, List<string>> GroupChatHistory;
+
         void HandleFile(ClientInfo sender, string receiverName, string fileName, long fileSize, long numberFrame)
         {
             ClientInfo receiver = sck.FirstOrDefault(x => x.Username == receiverName);
@@ -200,29 +206,32 @@ namespace CuoiKiLTMServer
         private void butSend_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMessage.Text)) return;
-
-            if (SelectedClient != null)
+            if (SelectedGroup != "")
             {
-                string groupName = lbUser.Text;
-                string packet = "msg|Server (Nhóm " + groupName + ")|" + txtMessage.Text;
-                byte[] data = Encoding.UTF8.GetBytes(packet);
-
-                // Vòng lặp gửi tin nhắn cho TẤT CẢ các thành viên nằm trong nhóm này
-                foreach (ClientInfo member in Group[groupName])
+                if (Group.ContainsKey(SelectedGroup))
                 {
-                    try
+                    string groupName = SelectedGroup;
+                    string packet = "grmsg|"+ groupName+"|Server|"+ txtMessage.Text;
+                    byte[] data = Encoding.UTF8.GetBytes(packet);
+
+                    // Vòng lặp gửi tin nhắn cho TẤT CẢ các thành viên nằm trong nhóm này
+                    foreach (ClientInfo member in Group[groupName])
                     {
-                        if (member.sckInfo != null && member.sckInfo.Connected)
+                        try
                         {
-                            member.sckInfo.Send(data);
+                            if (member.sckInfo != null && member.sckInfo.Connected)
+                            {
+                                member.sckInfo.Send(data);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
+                    CapNhatNoiDungChat("Server -> Nhóm [" + groupName + "]: " + txtMessage.Text);
                 }
-                CapNhatNoiDungChat("Server -> Nhóm [" + groupName + "]: " + txtMessage.Text);
             }
 
             // HOẶC NẾU BIẾN SELECTEDCLIENT ĐÃ ĐƯỢC GÁN TRƯỚC ĐÓ THÌ VẪN CHAT RIÊNG ĐƯỢC
+            //
             else if (SelectedClient != null)
             {
                 SendToSelected(SelectedClient, txtMessage.Text);
@@ -405,14 +414,19 @@ namespace CuoiKiLTMServer
             }
         }
 
-
-
+        //
+        string SelectedGroup = "";
+        //
         private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstGroup.SelectedItem == null) return;
 
             SelectedClient = null;
             string groupName = lstGroup.SelectedItem.ToString();
+            //7h
+            SelectedGroup = groupName;
+
+            //
             lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { groupName });
             txtBox.Clear();
         }
