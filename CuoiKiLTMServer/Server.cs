@@ -201,8 +201,7 @@ namespace CuoiKiLTMServer
         {
             if (string.IsNullOrEmpty(txtMessage.Text)) return;
 
-            // 1. KIỂM TRA XEM CÓ ĐANG CHỌN GỬI CHO NHÓM HAY KHÔNG
-            if (!string.IsNullOrEmpty(lbUser.Text) && Group.ContainsKey(lbUser.Text))
+            if (SelectedClient != null)
             {
                 string groupName = lbUser.Text;
                 string packet = "msg|Server (Nhóm " + groupName + ")|" + txtMessage.Text;
@@ -371,17 +370,10 @@ namespace CuoiKiLTMServer
         }
         private void Server_Load(object sender, EventArgs e)
         {
-            // FIX LỖI 1: Bắt buộc kích hoạt tính năng giữ Ctrl/Shift chọn nhiều dòng trên ListBox
-            lstUser.SelectionMode = SelectionMode.MultiExtended;
 
-            // FIX LỖI 3: Đăng ký sự kiện chuyển Tab tự làm mới danh sách (Tránh đè chồng dữ liệu)
-            if (tabControl != null)
-            {
-                tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-            }
         }
 
-        private void lbStatus_Click(object sender, EventArgs e)
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

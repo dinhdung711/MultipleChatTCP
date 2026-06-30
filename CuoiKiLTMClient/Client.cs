@@ -236,9 +236,12 @@ namespace CuoiKiLTMClient
                 foreach (string user in ds)
                 {
 
-                    if (user.Trim() != "" && user.Trim() != "grouplist")
+                    if (user.Trim() != "")
                     {
-                        lstUser.Items.Add(user);
+                        if (user != myName)
+                        {
+                            lstUser.Items.Add(user);
+                        }
                     }
                 }
             }));

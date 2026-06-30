@@ -74,7 +74,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMessage.Location = new System.Drawing.Point(245, 462);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(537, 22);
             this.txtMessage.Size = new System.Drawing.Size(538, 22);
             this.txtMessage.TabIndex = 35;
             this.txtMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessage_KeyPress);
@@ -88,7 +87,6 @@
             this.txtBox.Location = new System.Drawing.Point(245, 113);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
-            this.txtBox.Size = new System.Drawing.Size(537, 344);
             this.txtBox.Size = new System.Drawing.Size(538, 343);
             this.txtBox.TabIndex = 34;
             // 
@@ -123,7 +121,6 @@
             this.lbStatus.Size = new System.Drawing.Size(293, 28);
             this.lbStatus.TabIndex = 32;
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //this.lbStatus.Click += new System.EventHandler(this.lbStatus_Click);
             // 
             // label1
             // 
@@ -169,11 +166,8 @@
             // butFile
             // 
             this.butFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
- 
-            this.butFile.Location = new System.Drawing.Point(788, 364);
- 
             this.butFile.Location = new System.Drawing.Point(789, 363);
-             this.butFile.Name = "butFile";
+            this.butFile.Name = "butFile";
             this.butFile.Size = new System.Drawing.Size(85, 74);
             this.butFile.TabIndex = 39;
             this.butFile.Text = "Send File";
@@ -243,12 +237,7 @@
             // 
             // butExit
             // 
- 
-            this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
- 
             this.butExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
- 
             this.butExit.Location = new System.Drawing.Point(808, 40);
             this.butExit.Name = "butExit";
             this.butExit.Size = new System.Drawing.Size(72, 48);
@@ -259,13 +248,6 @@
             // 
             // butCreatGroup
             // 
- 
-            this.butCreatGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.butCreatGroup.Location = new System.Drawing.Point(788, 290);
-            this.butCreatGroup.Name = "butCreatGroup";
-            this.butCreatGroup.Size = new System.Drawing.Size(85, 68);
- 
             this.butCreatGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCreatGroup.Location = new System.Drawing.Point(789, 290);
             this.butCreatGroup.Name = "butCreatGroup";
@@ -278,13 +260,6 @@
             // 
             // butDeleteGroup
             // 
-  
-            this.butDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteGroup.Location = new System.Drawing.Point(788, 209);
-            this.butDeleteGroup.Name = "butDeleteGroup";
-            this.butDeleteGroup.Size = new System.Drawing.Size(85, 75);
- 
             this.butDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butDeleteGroup.Location = new System.Drawing.Point(789, 216);
             this.butDeleteGroup.Name = "butDeleteGroup";
