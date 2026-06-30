@@ -13,7 +13,6 @@ C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\bin\Debug\CuoiK
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\bin\Debug\CuoiKiLTMClient.exe
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\bin\Debug\CuoiKiLTMClient.pdb
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.csproj.AssemblyReference.cache
-C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.exe.config
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Client.resources
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Login.resources
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.Properties.Resources.resources
@@ -21,3 +20,4 @@ C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiK
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.csproj.CoreCompileInputs.cache
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.exe
 C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.pdb
+C:\NhanNguyen\LTMANG-ThayQuocAnh\MultipleChatTCP\CuoiKiLTMClient\obj\Debug\CuoiKiLTMClient.exe.config

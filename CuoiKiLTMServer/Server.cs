@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace CuoiKiLTMServer
 {
@@ -20,6 +21,7 @@ namespace CuoiKiLTMServer
         }
         //
         Dictionary<string,List<ClientInfo>> Group = new Dictionary<string,List<ClientInfo>>();
+        List<ClientInfo> groupMembers = new List<ClientInfo>();
         List<ClientInfo> sck = new List<ClientInfo>();
         //
         Socket sckServer = null;
@@ -91,32 +93,54 @@ namespace CuoiKiLTMServer
                 sender.Username = part[1];
                 lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
                 UpdateOnlineList();
+                UpdateGroupList();
+            }
+            else if (part[0] == "grouplist")
+            {
+                UpdateGroupList();
             }
             else if (part[0] == "msg" && part.Length > 2)
             {
                 string receiver = part[1];
                 string content = part[2];
-                ForwardMessage(
-                    sender.Username,
-                    receiver,
-                    content);
+
+                if (Group.ContainsKey(receiver))
+                {
+                    string packet = "msg|" + "[" + receiver + "] " + sender.Username + "|" + content;
+                    byte[] data = Encoding.UTF8.GetBytes(packet);
+
+                    foreach (ClientInfo member in Group[receiver])
+                    {
+                        try
+                        {
+                            if (member.Username != sender.Username && member.sckInfo != null && member.sckInfo.Connected)                           
+                                {
+                                member.sckInfo.Send(data);
+                            }
+                        }
+                        catch { }
+                    }
+                    txtBox.Invoke(new Action(() => { CapNhatNoiDungChat(sender.Username + " -> Nhóm [" + receiver + "]: " + content); }));
+                }
+                else
+                {
+                    ForwardMessage(sender.Username, receiver, content);
+                }
             }
-         
-            void ForwardMessage(string from, string to, string content)
+        } 
+
+        void ForwardMessage(string from, string to, string content)
+        {
+            ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
+            if (receiver == null) return;
+
+            string packet = "msg|" + from + "|" + content;
+            try
             {
-                ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
-                if (receiver == null)
-                    return;
-                string packet = "msg|" + from + "|" + content;
-                try
-                {
-                    receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
-                    txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + " -> " + to + " : " + content });
-                }
-                catch
-                {
-                }
+                receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
+                txtBox.Invoke(new Action(() => { CapNhatNoiDungChat(from + " -> " + to + " : " + content); }));
             }
+            catch { }
         }
         delegate void CapNhatGiaoDien(string s);
 
@@ -133,23 +157,45 @@ namespace CuoiKiLTMServer
         {
             if (string.IsNullOrEmpty(txtMessage.Text)) return;
 
-            if (SelectedClient != null)
+            // 1. KIỂM TRA XEM CÓ ĐANG CHỌN GỬI CHO NHÓM HAY KHÔNG
+            if (!string.IsNullOrEmpty(lbUser.Text) && Group.ContainsKey(lbUser.Text))
+            {
+                string groupName = lbUser.Text;
+                string packet = "msg|Server (Nhóm " + groupName + ")|" + txtMessage.Text;
+                byte[] data = Encoding.UTF8.GetBytes(packet);
+
+                // Vòng lặp gửi tin nhắn cho TẤT CẢ các thành viên nằm trong nhóm này
+                foreach (ClientInfo member in Group[groupName])
+                {
+                    try
+                    {
+                        if (member.sckInfo != null && member.sckInfo.Connected)
+                        {
+                            member.sckInfo.Send(data);
+                        }
+                    }
+                    catch { }
+                }
+                CapNhatNoiDungChat("Server -> Nhóm [" + groupName + "]: " + txtMessage.Text);
+            }
+ 
+            // HOẶC NẾU BIẾN SELECTEDCLIENT ĐÃ ĐƯỢC GÁN TRƯỚC ĐÓ THÌ VẪN CHAT RIÊNG ĐƯỢC
+            else if (SelectedClient != null)
             {
                 SendToSelected(SelectedClient, txtMessage.Text);
             }
+            // 3. NẾU KHÔNG CHỌN AI THÌ GỬI BROADCAST TẤT CẢ
             else
             {
-                //broatcast ( server không chọn người gửi thì sẽ gửi cho tất cả người dùng online 
                 BroadcastMessage(txtMessage.Text);
             }
-           
-                txtMessage.Text = "";
+
+            txtMessage.Text = "";
         }
-        // Hàm thực hiện Broadcast gửi tới tất cả Client
         void BroadcastMessage(string content)
         {
             string packet = "msg|Server|" + content;
-            byte[] data = Encoding.ASCII.GetBytes(packet);
+            byte[] data = Encoding.UTF8.GetBytes(packet);
 
             foreach (ClientInfo client in sck)
             {
@@ -167,6 +213,17 @@ namespace CuoiKiLTMServer
             }
             CapNhatNoiDungChat("Server (Thông báo chung): " + content);
         }
+        private void butBroadcastSelect_Click(object sender, EventArgs e)
+        {
+            SelectedClient = null; 
+
+            lbUser.Invoke(new Action(() => { lbUser.Text = "Tất cả (Broadcast)"; }));
+
+            lstUser.Invoke(new Action(() => { lstUser.ClearSelected(); }));
+
+            CapNhatNoiDungChat("Hệ thống: Đã chuyển về chế độ gửi Thông báo chung (Broadcast).");
+        }
+
         public void CloseClient(ClientInfo client)
         {
             try { client.sckInfo.Shutdown(SocketShutdown.Both); } catch { }
@@ -222,6 +279,34 @@ namespace CuoiKiLTMServer
             CapNhatNoiDungChat("Server -> " + client.Username + ": " + s);
         }
 
+        // 1. Hàm đồng bộ danh sách nhóm xuống tất cả Client
+        void UpdateGroupList()
+        {
+            string groupNames = "grouplist|";
+            foreach (string gName in Group.Keys)
+            {
+                groupNames += gName + ",";
+            }
+
+            if (groupNames.EndsWith(","))
+            {
+                groupNames = groupNames.TrimEnd(',');
+            }
+
+            byte[] packet = Encoding.UTF8.GetBytes(groupNames);
+
+            foreach (ClientInfo c in groupMembers)
+            {
+                try
+                {
+                    if (c.sckInfo != null && c.sckInfo.Connected)
+                    {
+                        c.sckInfo.Send(packet);
+                    }
+                }
+                catch { }
+            }
+        }
         private void butSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -243,30 +328,146 @@ namespace CuoiKiLTMServer
         }
         private void Server_Load(object sender, EventArgs e)
         {
+            // FIX LỖI 1: Bắt buộc kích hoạt tính năng giữ Ctrl/Shift chọn nhiều dòng trên ListBox
+            lstUser.SelectionMode = SelectionMode.MultiExtended;
 
+            // FIX LỖI 3: Đăng ký sự kiện chuyển Tab tự làm mới danh sách (Tránh đè chồng dữ liệu)
+            if (tabControl != null)
+            {
+                tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
+            }
+        }
+
+        // TỰ ĐỘNG LÀM MỚI DANH SÁCH LSTUSER MỖI KHI BẤM CHUYỂN TAB
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstUser.Items.Clear();
+            if (tabControl.SelectedIndex == 0) // Tab Online
+            {
+                foreach (var client in sck) lstUser.Items.Add(client);
+            }
+            else // Tab Group
+            {
+                foreach (string gName in Group.Keys) lstUser.Items.Add(gName);
+
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab == userOnline)
-            {
-                if (lstUser.SelectedItem is ClientInfo client)
-                {
-                    MessageBox.Show(client.Username);
-                    SelectedClient = client;
-                    lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
+            if (lstUser.SelectedItem == null) return;
 
-                    txtBox.Clear();
-                }
+            // Trường hợp 1: Chọn một Client cá nhân để chat riêng (Giữ cũ)
+            if (lstUser.SelectedItem is ClientInfo client)
+            {
+                SelectedClient = client;
+                lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { client.Username });
+                txtBox.Clear();
             }
         }
+    
+        private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstGroup.SelectedItem==null) return; 
+
+            SelectedClient = null;
+            string groupName = lstGroup.SelectedItem.ToString();
+            lbUser.Invoke(new CapNhatGiaoDien(CapNhatNguoiDung), new object[] { groupName });
+            txtBox.Clear();
+        }
+
 
         private void lbStatus_Click(object sender, EventArgs e)
         {
 
         }
+        // 1. SỰ KIỆN KHI SERVER BẤM NÚT "CREAT GROUP"
+        private void butCreatGroup_Click(object sender, EventArgs e)
+        {
+            string groupName = Interaction.InputBox("Nhập tên nhóm chat cần tạo:", "Tạo Nhóm", "");
 
-       
+            if (string.IsNullOrEmpty(groupName.Trim()))
+            {
+                MessageBox.Show("Tên nhóm không được để trống!");
+                return;
+            }
+
+            if (Group.ContainsKey(groupName))
+            {
+                MessageBox.Show("Tên nhóm này đã tồn tại!");
+                return;
+            }
+
+          
+                // SỬA CHUẨN: Vì lstUser chứa trực tiếp đối tượng ClientInfo, ép kiểu thẳng để bốc đối tượng ra mà không sợ sai lệch chuỗi
+                if (lstUser.SelectedItems.Count > 0)
+                {
+                    foreach (var item in lstUser.SelectedItems)
+                    {
+                        if (item is ClientInfo selectedClient)
+                        {
+                            groupMembers.Add(selectedClient);
+                        }
+                    }
+                    CapNhatNoiDungChat($"Server: Đã tạo nhóm [{groupName}] với {lstUser.SelectedItems.Count} thành viên được chọn .");
+                }
+                else
+                {
+                    // Nếu không bôi chọn ai, mặc định thêm TẤT CẢ các Client đang online vào nhóm
+                    groupMembers = new List<ClientInfo>(sck);
+                    CapNhatNoiDungChat($"Server: Đã tạo nhóm chung [{groupName}] cho toàn bộ thành viên.");
+                }
+
+                // Lưu nhóm vào bộ nhớ của Server và đồng bộ danh sách nhóm công khai
+                Group.Add(groupName, groupMembers);
+                UpdateGroupList();
+                lstGroup.Invoke(new Action(() => lstGroup.Items.Add(groupName)));
+
+                // Gửi lệnh thông báo tạo nhóm thành công xuống RIÊNG các máy thành viên trong nhóm để Client cập nhật giao diện
+                string createGroupPacket = "creategroup|" + groupName;
+                byte[] groupData = Encoding.UTF8.GetBytes(createGroupPacket);
+                foreach (ClientInfo member in groupMembers)
+                {
+                    try
+                    {
+                        if (member.sckInfo != null && member.sckInfo.Connected)
+                        {
+                            member.sckInfo.Send(groupData);
+                        }
+                    }
+                    catch { }
+                }
+            }
+        
+
+        // 2. SỰ KIỆN KHI SERVER BẤM NÚT "DELETE GROUP"
+        private void butDeleteGroup_Click(object sender, EventArgs e)
+        {
+            string groupName = Interaction.InputBox("Nhập chính xác tên nhóm cần xóa:", "Xóa Nhóm", "");
+
+            if (string.IsNullOrEmpty(groupName.Trim())) return;
+
+            if (Group.ContainsKey(groupName))
+            {
+                Group.Remove(groupName); // Xóa khỏi bộ nhớ Server
+                UpdateGroupList();       // Đồng bộ để tất cả Client biến mất nhóm này
+
+                lstGroup.Invoke(new Action(() => {
+                    if (lstGroup.Items.Contains(groupName))
+                    {
+                        lstGroup.Items.Remove(groupName);
+                    }
+                }));
+
+                CapNhatNoiDungChat($"Server: Đã xóa nhóm [{groupName}].");
+
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy nhóm có tên này để xóa!");
+            }
+        }
+
+        
     }
-
 }
