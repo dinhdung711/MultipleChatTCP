@@ -131,6 +131,7 @@ namespace CuoiKiLTMClient
                     string tb = part[2];
                     txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { part[1] + ": " + tb });
                 }
+
                 string from = part[1];
                 string content = part[2];
                 SaveMessage(from, from + ": " + content);
