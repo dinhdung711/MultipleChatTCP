@@ -22,7 +22,7 @@ namespace CuoiKiLTMServer
         }
         //
 
-        Dictionary<string,List<ClientInfo>> Group = new Dictionary<string,List<ClientInfo>>();
+        Dictionary<string, List<ClientInfo>> Group = new Dictionary<string, List<ClientInfo>>();
         List<ClientInfo> groupMembers = new List<ClientInfo>();
         List<ClientInfo> sck = new List<ClientInfo>();
         //
@@ -56,12 +56,12 @@ namespace CuoiKiLTMServer
             connection++;
             //
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "hien co " + connection + "Client" });
-            
+
             info.sckInfo.BeginReceive(info.data, 0, info.data.Length, SocketFlags.None, new AsyncCallback(xulydulieu), info);
             //
             sckServer.BeginAccept(new AsyncCallback(xulyketnoi), sckServer);
-        }   
-     
+        }
+
 
         private void xulydulieu(IAsyncResult result)
         {
@@ -74,12 +74,12 @@ namespace CuoiKiLTMServer
                     CloseClient(info);
                     return;
                 }
-                
+
                 string msg = Encoding.UTF8.GetString(info.data, 0, receive);
                 xulitinnhan(info, msg);
-                 
+
                 info.sckInfo.BeginReceive(info.data, 0, info.data.Length, SocketFlags.None, new AsyncCallback(xulydulieu), info);
-                
+
             }
             catch (SocketException)
             {
@@ -94,19 +94,19 @@ namespace CuoiKiLTMServer
             if (part[0] == "login" && part.Length > 1)
             {
                 string username = part[1];
-                bool exists = false; 
+                bool exists = false;
                 foreach (ClientInfo c in sck)
+                {
+                    if (c.Username == username)
                     {
-                        if (c.Username == username)
-                        {
-                            exists = true;
-                            break;
-                        }
+                        exists = true;
+                        break;
                     }
+                }
                 if (exists)
                 {
                     sender.sckInfo.Send(Encoding.UTF8.GetBytes("loginfail"));
-                     return; 
+                    return;
                 }
                 sender.Username = part[1];
                 lstUser.Invoke(new Action(() => lstUser.Items.Add(sender)));
@@ -144,7 +144,7 @@ namespace CuoiKiLTMServer
                 {
                     ForwardMessage(sender.Username, receiver, content);
                 }
-                 
+
             }
             else if (part[0] == "file")
             {
@@ -153,39 +153,39 @@ namespace CuoiKiLTMServer
             }
 
         }
-        void HandleFile(ClientInfo sender,string receiverName,string fileName,long fileSize,long numberFrame)
+        void HandleFile(ClientInfo sender, string receiverName, string fileName, long fileSize, long numberFrame)
         {
-            ClientInfo receiver =sck.FirstOrDefault(x => x.Username == receiverName );
+            ClientInfo receiver = sck.FirstOrDefault(x => x.Username == receiverName);
             if (receiver == null)
             {
                 return;
             }
-            string file ="file|" +sender.Username + "|" +fileName + "|" +fileSize + "|" +numberFrame;     
+            string file = "file|" + sender.Username + "|" + fileName + "|" + fileSize + "|" + numberFrame;
             receiver.sckInfo.Send(Encoding.UTF8.GetBytes(file));
             byte[] buffer = new byte[1024];
 
             for (int i = 0; i < numberFrame; i++)
             {
                 int n = sender.sckInfo.Receive(buffer);
-                receiver.sckInfo.Send( buffer,n,SocketFlags.None);            
+                receiver.sckInfo.Send(buffer, n, SocketFlags.None);
             }
         }
         void ForwardMessage(string from, string to, string content)
+        {
+            ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
+            if (receiver == null)
+                return;
+            string packet = "msg|" + from + "|" + content;
+            try
             {
-                ClientInfo receiver = sck.FirstOrDefault(x => x.Username == to);
-                if (receiver == null)
-                    return;
-                string packet = "msg|" + from + "|" + content;
-                try
-                {
-                    receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
-                    txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + " -> " + to + " : " + content });
-                }
-                catch
-                {
-                }
+                receiver.sckInfo.Send(Encoding.UTF8.GetBytes(packet));
+                txtBox.Invoke(new CapNhatGiaoDien(CapNhatNoiDungChat), new object[] { from + " -> " + to + " : " + content });
             }
-       
+            catch
+            {
+            }
+        }
+
         delegate void CapNhatGiaoDien(string s);
 
         void CapNhatTrangThai(string s)
@@ -221,7 +221,7 @@ namespace CuoiKiLTMServer
                 }
                 CapNhatNoiDungChat("Server -> Nhóm [" + groupName + "]: " + txtMessage.Text);
             }
- 
+
             // HOẶC NẾU BIẾN SELECTEDCLIENT ĐÃ ĐƯỢC GÁN TRƯỚC ĐÓ THÌ VẪN CHAT RIÊNG ĐƯỢC
             else if (SelectedClient != null)
             {
@@ -258,7 +258,7 @@ namespace CuoiKiLTMServer
         }
         private void butBroadcastSelect_Click(object sender, EventArgs e)
         {
-            SelectedClient = null; 
+            SelectedClient = null;
 
             lbUser.Invoke(new Action(() => { lbUser.Text = "Tất cả (Broadcast)"; }));
 
@@ -271,7 +271,7 @@ namespace CuoiKiLTMServer
         {
             try { client.sckInfo.Shutdown(SocketShutdown.Both); } catch { }
             try { client.sckInfo.Close(); } catch { }
-            
+
             sck.Remove(client);
             // xoa client tren thanh online
             lstUser.Invoke(new Action(() => lstUser.Items.Remove(client)));
@@ -280,9 +280,9 @@ namespace CuoiKiLTMServer
             lbStatus.Invoke(new CapNhatGiaoDien(CapNhatTrangThai), new object[] { "So Client ket noi :" + connection });
             UpdateOnlineList();
         }
-       
+
         ClientInfo SelectedClient = null;
-       
+
         void CapNhatNguoiDung(string s)
         {
             lbUser.Text = s;
@@ -405,11 +405,11 @@ namespace CuoiKiLTMServer
             }
         }
 
-       
-    
+
+
         private void lstGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstGroup.SelectedItem==null) return; 
+            if (lstGroup.SelectedItem == null) return;
 
             SelectedClient = null;
             string groupName = lstGroup.SelectedItem.ToString();
@@ -418,7 +418,7 @@ namespace CuoiKiLTMServer
         }
 
 
-   
+
         // 1. SỰ KIỆN KHI SERVER BẤM NÚT "CREAT GROUP"
         private void butCreatGroup_Click(object sender, EventArgs e)
         {
@@ -436,76 +436,87 @@ namespace CuoiKiLTMServer
                 return;
             }
 
-          
-                // SỬA CHUẨN: Vì lstUser chứa trực tiếp đối tượng ClientInfo, ép kiểu thẳng để bốc đối tượng ra mà không sợ sai lệch chuỗi
-                if (lstUser.SelectedItems.Count > 0)
-                {
-                    foreach (var item in lstUser.SelectedItems)
-                    {
-                        if (item is ClientInfo selectedClient)
-                        {
-                            groupMembers.Add(selectedClient);
-                        }
-                    }
-                    CapNhatNoiDungChat($"Server: Đã tạo nhóm [{groupName}] với {lstUser.SelectedItems.Count} thành viên được chọn .");
-                }
-                else
-                {
-                    // Nếu không bôi chọn ai, mặc định thêm TẤT CẢ các Client đang online vào nhóm
-                    groupMembers = new List<ClientInfo>(sck);
-                    CapNhatNoiDungChat($"Server: Đã tạo nhóm chung [{groupName}] cho toàn bộ thành viên.");
-                }
 
-                // Lưu nhóm vào bộ nhớ của Server và đồng bộ danh sách nhóm công khai
-                Group.Add(groupName, groupMembers);
-                UpdateGroupList();
-                lstGroup.Invoke(new Action(() => lstGroup.Items.Add(groupName)));
-
-                // Gửi lệnh thông báo tạo nhóm thành công xuống RIÊNG các máy thành viên trong nhóm để Client cập nhật giao diện
-                string createGroupPacket = "creategroup|" + groupName;
-                byte[] groupData = Encoding.UTF8.GetBytes(createGroupPacket);
-                foreach (ClientInfo member in groupMembers)
+            // SỬA CHUẨN: Vì lstUser chứa trực tiếp đối tượng ClientInfo, ép kiểu thẳng để bốc đối tượng ra mà không sợ sai lệch chuỗi
+            if (lstUser.SelectedItems.Count > 0)
+            {
+                foreach (var item in lstUser.SelectedItems)
                 {
-                    try
+                    if (item is ClientInfo selectedClient)
                     {
-                        if (member.sckInfo != null && member.sckInfo.Connected)
-                        {
-                            member.sckInfo.Send(groupData);
-                        }
+                        groupMembers.Add(selectedClient);
                     }
-                    catch { }
                 }
+                CapNhatNoiDungChat($"Server: Đã tạo nhóm [{groupName}] với {lstUser.SelectedItems.Count} thành viên được chọn .");
             }
-        
+            else
+            {
+                // Nếu không bôi chọn ai, mặc định thêm TẤT CẢ các Client đang online vào nhóm
+                groupMembers = new List<ClientInfo>(sck);
+                CapNhatNoiDungChat($"Server: Đã tạo nhóm chung [{groupName}] cho toàn bộ thành viên.");
+            }
+
+            // Lưu nhóm vào bộ nhớ của Server và đồng bộ danh sách nhóm công khai
+            Group.Add(groupName, groupMembers);
+            UpdateGroupList();
+            lstGroup.Invoke(new Action(() => lstGroup.Items.Add(groupName)));
+
+            // Gửi lệnh thông báo tạo nhóm thành công xuống RIÊNG các máy thành viên trong nhóm để Client cập nhật giao diện
+            string createGroupPacket = "creategroup|" + groupName;
+            byte[] groupData = Encoding.UTF8.GetBytes(createGroupPacket);
+            foreach (ClientInfo member in groupMembers)
+            {
+                try
+                {
+                    if (member.sckInfo != null && member.sckInfo.Connected)
+                    {
+                        member.sckInfo.Send(groupData);
+                    }
+                }
+                catch { }
+            }
+        }
+
 
         // 2. SỰ KIỆN KHI SERVER BẤM NÚT "DELETE GROUP"
         private void butDeleteGroup_Click(object sender, EventArgs e)
         {
-            string groupName = Interaction.InputBox("Nhập chính xác tên nhóm cần xóa:", "Xóa Nhóm", "");
-
-            if (string.IsNullOrEmpty(groupName.Trim())) return;
-
-            if (Group.ContainsKey(groupName))
+            // 1. Kiểm tra xem người dùng đã chọn nhóm nào trong ListBox chưa
+            if (lstGroup.SelectedItem == null)
             {
-                Group.Remove(groupName); // Xóa khỏi bộ nhớ Server
-                UpdateGroupList();       // Đồng bộ để tất cả Client biến mất nhóm này
+                MessageBox.Show("Vui lòng click chọn một nhóm trong danh sách trước khi xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // 2. Lấy thẳng tên nhóm đang được chọn
+            string groupName = lstGroup.SelectedItem.ToString();
+            // 3. Hiện hộp thoại xác nhận để tránh bấm nhầm
+            DialogResult dialogResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa nhóm [{groupName}] không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                lstGroup.Invoke(new Action(() => {
-                    if (lstGroup.Items.Contains(groupName))
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (Group.ContainsKey(groupName))
+                {
+                    Group.Remove(groupName); // Xóa khỏi bộ nhớ Server
+                    UpdateGroupList();       // Đồng bộ để tất cả Client biến mất nhóm này
+
+                    lstGroup.Invoke(new Action(() =>
                     {
-                        lstGroup.Items.Remove(groupName);
-                    }
-                }));
+                        if (lstGroup.Items.Contains(groupName))
+                        {
+                            lstGroup.Items.Remove(groupName);
+                        }
+                    }));
 
-                CapNhatNoiDungChat($"Server: Đã xóa nhóm [{groupName}].");
+                    CapNhatNoiDungChat($"Server: Đã xóa nhóm [{groupName}].");
 
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy nhóm có tên này để xóa!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Không tìm thấy nhóm có tên này để xóa!");
-            }
+
+
         }
-
-        
     }
 }
