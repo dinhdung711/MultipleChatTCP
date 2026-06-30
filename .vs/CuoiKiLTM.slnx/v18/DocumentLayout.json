@@ -3,27 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|solutionrelative:cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|solutionrelative:cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C7071DB0-383E-4D65-8740-7A5341DAD1B1}|CuoiKiLTMServer\\CuoiKiLTMServer.csproj|solutionrelative:cuoikiltmserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|c:\\users\\vu dinh dung\\source\\repos\\cuoikiltm\\cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A39E7EF5-EEE2-4456-85E3-03683BBA0789}|CuoiKiLTMClient\\CuoiKiLTMClient.csproj|solutionrelative:cuoikiltmclient\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -57,8 +57,7 @@
               "RelativeToolTip": "CuoiKiLTMClient\\Login.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAWwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T16:43:24.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-29T16:43:24.994Z"
             },
             {
               "$type": "Document",
@@ -69,8 +68,7 @@
               "ToolTip": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMClient\\Login.cs [Design]",
               "RelativeToolTip": "CuoiKiLTMClient\\Login.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T16:43:12.43Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-06-29T16:43:12.43Z"
             },
             {
               "$type": "Document",
@@ -82,18 +80,17 @@
               "RelativeToolTip": "..\\..\\..\\OneDrive\\Downloads\\Program (3).cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAjwEoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T14:57:36.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-29T14:57:36.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Server.cs",
               "DocumentMoniker": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMServer\\Server.cs",
               "RelativeDocumentMoniker": "CuoiKiLTMServer\\Server.cs",
               "ToolTip": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMServer\\Server.cs",
               "RelativeToolTip": "CuoiKiLTMServer\\Server.cs",
-              "ViewState": "AgIAABcBAAAAAAAAAAAiwG4AAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwBgAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-29T14:01:41.744Z",
               "EditorCaption": ""
@@ -106,7 +103,7 @@
               "RelativeDocumentMoniker": "CuoiKiLTMClient\\Client.cs",
               "ToolTip": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMClient\\Client.cs",
               "RelativeToolTip": "CuoiKiLTMClient\\Client.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAcwNYAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAowLgAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-29T14:01:37.235Z",
               "EditorCaption": ""
@@ -125,15 +122,14 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Server.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMServer\\Server.cs",
               "RelativeDocumentMoniker": "CuoiKiLTMServer\\Server.cs",
               "ToolTip": "C:\\Users\\Vu Dinh Dung\\source\\repos\\CuoiKiLTM\\CuoiKiLTMServer\\Server.cs [Design]",
               "RelativeToolTip": "CuoiKiLTMServer\\Server.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T14:01:30.878Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-06-29T14:01:30.878Z"
             }
           ]
         }
